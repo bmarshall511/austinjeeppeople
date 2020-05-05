@@ -54,7 +54,7 @@ if ( ! function_exists('ajpevents_post_types') ) {
       'description'           => __( 'AJP member events.', 'ajpevents' ),
       'labels'                => $labels,
       'show_in_rest'          => true,
-      'supports'              => array( 'title', 'editor', 'thumbnail', 'revisions', 'excerpt' ),
+      'supports'              => array( 'title', 'editor', 'thumbnail', 'revisions', 'excerpt', 'comments' ),
       'taxonomies'            => array( 'category', 'post_tag' ),
       'hierarchical'          => false,
       'public'                => true,
