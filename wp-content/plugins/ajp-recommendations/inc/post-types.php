@@ -16,7 +16,7 @@ if ( ! function_exists('ajprecommendations_post_types') ) {
 
     $labels = array(
       'name'                  => _x( 'Companies', 'Post Type General Name', 'ajprecommendations' ),
-      'singular_name'         => _x( 'Recommendation', 'Post Type Singular Name', 'ajprecommendations' ),
+      'singular_name'         => _x( 'Company', 'Post Type Singular Name', 'ajprecommendations' ),
       'menu_name'             => __( 'Companies', 'ajprecommendations' ),
       'name_admin_bar'        => __( 'Company', 'ajprecommendations' ),
       'archives'              => __( 'Company Archives', 'ajprecommendations' ),
@@ -75,9 +75,4 @@ if ( ! function_exists('ajprecommendations_post_types') ) {
 
   }
   add_action( 'init', 'ajprecommendations_post_types', 0 );
-}
-
-// Import recommendations from old site
-function ajprecommendations_import() {
-  $conn = new PDO('mysql:host=35.208.110.238;dbname=austinje_eppeople', 'austinje_admin', $password);
 }
