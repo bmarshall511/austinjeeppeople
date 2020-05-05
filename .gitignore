@@ -1,0 +1,36 @@
+# WordPress #
+#############
+wp-config-local.php
+wp-content/uploads
+
+# Logs and databases #
+######################
+error_log
+php_errorlog
+*.log
+*.sql
+
+# Development #
+###############
+.DS_Store*
+sync.sh
+.env
+
+# Premium Plugins #
+###################
+wp-content/plugins/ele-custom-skin-pro
+wp-content/plugins/elementor-pro
+wp-content/plugins/wpseo-local
+wp-content/plugins/wordpress-seo-premium
+wp-content/plugins/advanced-custom-fields-pro
+
+# Wordfence #
+#############
+wordfence-waf.php
+.user.ini
+wp-content/wflogs
+
+# SG Optimizer #
+################
+wp-content/object-cache.php
+wp-content/plugins/sg-cachepress/sg-config.json

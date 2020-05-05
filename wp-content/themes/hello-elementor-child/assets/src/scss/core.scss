@@ -1,0 +1,20 @@
+////
+/// Contains all core styles.
+/// @group core
+/// @author Ben Marshall
+////
+
+// Import the SCSS & CSS variables & mixins.
+@import 'core/core';
+
+// Import normalize to make base element styles consistent between browsers.
+@import 'normalize';
+
+// Import base element styles.
+@import 'core/base';
+
+// Import default form styles.
+@import 'core/forms';
+
+// Import default typography styles.
+@import 'core/typography';

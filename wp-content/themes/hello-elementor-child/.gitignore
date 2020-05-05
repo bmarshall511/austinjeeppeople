@@ -1,0 +1,10 @@
+# Logs and databases #
+######################
+error_log
+php_errorlog
+*.log
+*.sql
+
+# Development #
+######################
+.DS_Store*
