@@ -2,6 +2,7 @@
 #############
 wp-config-local.php
 wp-content/uploads
+.htaccess
 
 # Logs and databases #
 ######################
