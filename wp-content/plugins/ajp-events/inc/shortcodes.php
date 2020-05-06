@@ -25,7 +25,9 @@ function ajpevents_shortcode_date() {
       . date( 'h:i A', strtotime( $date['end'] ) );
   } elseif ( ! $end ) {
     // No end time
-    echo date( 'l, F j, Y h:i A', strtotime( $date['start'] ) );
+    echo date( 'l, F j, Y', strtotime( $date['start'] ) )
+      . __ ( ' at ' )
+      . date( 'h:i A', strtotime( $date['start'] ) );
   } else {
     // Starts & ends different dates
     echo date( 'l, F j h:i A', strtotime( $date['start'] ) )
