@@ -22,6 +22,7 @@ use SiteGround_Optimizer\Install_Service\Install_5_4_0;
 use SiteGround_Optimizer\Install_Service\Install_5_4_3;
 use SiteGround_Optimizer\Install_Service\Install_5_5_0;
 use SiteGround_Optimizer\Install_Service\Install_5_5_2;
+use SiteGround_Optimizer\Install_Service\Install_5_5_4;
 use SiteGround_Optimizer\Supercacher\Supercacher;
 
 /**
@@ -54,6 +55,7 @@ class Install_Service {
 			new Install_5_4_3(),
 			new Install_5_5_0(),
 			new Install_5_5_2(),
+			new Install_5_5_4(),
 		);
 
 		add_action( 'upgrader_process_complete', array( $this, 'install' ) );

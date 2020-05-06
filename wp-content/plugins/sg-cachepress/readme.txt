@@ -204,6 +204,13 @@ Our plugin uses a cookie in order to function properly. It does not store person
 
 == Changelog ==
 
+= Version 5.5.4 =
+* Fixed issue with CSS Combination causing problems with media specific stylesheets
+* Added defer attribute for the Combined JS files when JS Defer is enabled
+* Better support with sites using long domains (.blog, .marketing, etc.)
+* Fixed Memcached XSS security issues
+* Fixed CSS & JS Combination for sites with custom upload folders
+
 = Version 5.5.3 =
 * Fix ISE for Flatsome theme
 

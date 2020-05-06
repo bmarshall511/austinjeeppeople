@@ -120,7 +120,7 @@ class Css_Combinator extends Abstract_Combinator {
 		// Loop through all styles in the queue and check for excludes.
 		foreach ( $styles as $style ) {
 			// Bail if the sctyle is excluded.
-			if ( $this->is_excluded( $style[2] ) ) {
+			if ( $this->is_excluded( $style ) ) {
 				continue;
 			}
 			// Add the style url and tag.
@@ -171,24 +171,32 @@ class Css_Combinator extends Abstract_Combinator {
 	 *
 	 * @since  5.5.2
 	 *
-	 * @param  string $src style source.
+	 * @param  string $style Style tag.
 	 *
 	 * @return boolean     True if the style is excluded, false otherwise.
 	 */
-	public function is_excluded( $src ) {
+	public function is_excluded( $style ) {
+		if ( false !== strpos( $style[0], 'media=' ) && ! preg_match( '/media=["\'](?:\s*|[^"\']*?\b(all|screen)\b[^"\']*?)["\']/i', $style[0] ) ) {
+			return true;
+		}
+
+		if ( false !== strpos( $style[0], 'only screen and' ) ) {
+			return true;
+		}
+
 		// Get the host from src..
-		$host = parse_url( $src, PHP_URL_HOST );
+		$host = parse_url( $style[2], PHP_URL_HOST );
 
 		// Bail if it's an external style.
 		if (
 			@strpos( Helper::get_home_url(), $host ) === false &&
-			! strpos( $src, 'wp-includes' )
+			! strpos( $style[2], 'wp-includes' )
 		) {
 			return true;
 		}
 
 		// Remove query strings from the url.
-		$src  = Front_End_Optimization::remove_query_strings( $src );
+		$src  = Front_End_Optimization::remove_query_strings( $style[2] );
 
 		// Bail if the url is excluded.
 		if ( in_array( str_replace( Helper::get_site_url(), '', $src ), $this->excluded_urls ) ) {
@@ -258,7 +266,7 @@ class Css_Combinator extends Abstract_Combinator {
 					$match = trim( $match, " \t\n\r\0\x0B\"'" );
 
 					// Bail if the url is valid.
-					if ( false == preg_match( '~(http(?:s)?:)?\/\/(?:[\w-]+\.)*([\w-]{1,63})(?:\.(?:\w{3}|\w{2}))(?:$|\/)~', $match ) ) {
+					if ( false == preg_match( '~(http(?:s)?:)?\/\/(?:[\w-]+\.)*([\w-]{1,63})(?:\.(?:\w{2,}))(?:$|\/)~', $match ) ) {
 						$replacement = str_replace( $match, $dir . $match, $matches[0][ $index ] );
 
 						$replacements[ $matches[0][ $index ] ] = $replacement;

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - SG Optimizer - Development (trunk) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2020-04-27 08:55+0000\n"
+"PO-Revision-Date: 2020-05-04 12:53+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1051,7 +1051,7 @@ msgstr "Configura tu versión de PHP"
 
 #: helpers/sg-cachepress-react-strings.php:211
 msgid "You are currently running on PHP %(version)s."
-msgstr "Actualmente estás ejecutando PHP %(versión)s."
+msgstr "Actualmente estás ejecutando PHP %(version)s."
 
 #: helpers/sg-cachepress-react-strings.php:212
 msgid "PHP Management Method"

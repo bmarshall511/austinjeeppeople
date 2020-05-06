@@ -1,0 +1,431 @@
+{
+    "key": "group_5eb1be48155ee",
+    "title": "Company Options",
+    "fields": [
+        {
+            "key": "field_5eb1c0740c7a4",
+            "label": "Logo",
+            "name": "ajp_logo",
+            "type": "image",
+            "instructions": "Upload the companies primary logo used on light backgrounds.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_5eb1c0960c7a5",
+            "label": "Alternate Logo",
+            "name": "ajp_logo_alt",
+            "type": "image",
+            "instructions": "Optionally, upload an alternative logo used on dark backgrounds.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_5eb1be5dba05f",
+            "label": "General",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5eb1c27c84208",
+            "label": "Contact Information",
+            "name": "contact_information",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5eb1c28884209",
+                    "label": "Phone (e.g. XXX-XXX-XXXX)",
+                    "name": "phone",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5eb1c2ac8420a",
+                    "label": "Email",
+                    "name": "email",
+                    "type": "email",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_5eb1c2c58420b",
+                    "label": "Website",
+                    "name": "website",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": ""
+                }
+            ]
+        },
+        {
+            "key": "field_5eb1be6dba060",
+            "label": "Business Address",
+            "name": "ajp_address",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5eb1be7eba061",
+                    "label": "Address 1",
+                    "name": "address_1",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5eb1be89ba062",
+                    "label": "Address 2",
+                    "name": "address_2",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5eb1be92ba063",
+                    "label": "City",
+                    "name": "city",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "Austin",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5eb1be99ba064",
+                    "label": "State",
+                    "name": "state",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "AL": "Alabama",
+                        "AK": "Alaska",
+                        "AZ": "Arizona",
+                        "AR": "Arkansas",
+                        "CA": "California",
+                        "CO": "Colorado",
+                        "CT": "Connecticut",
+                        "DE": "Delaware",
+                        "DC": "District of Colombia",
+                        "FL": "Florida",
+                        "GA": "Georgia",
+                        "HI": "Hawaii",
+                        "ID": "Idaho",
+                        "IL": "Illinois",
+                        "IN": "Indiana",
+                        "IA": "Iowa",
+                        "KS": "Kansas",
+                        "KY": "Kentucky",
+                        "LA": "Louisiana",
+                        "ME": "Maine",
+                        "MD": "Maryland",
+                        "MA": "Massachusetts",
+                        "MI": "Michigan",
+                        "MN": "Minnesota",
+                        "MS": "Mississippi",
+                        "MO": "Missouri",
+                        "MT": "Montana",
+                        "NE": "Nebraska",
+                        "NV": "Nevada",
+                        "NH": "New Hampshire",
+                        "NJ": "New Jersey",
+                        "NM": "New Mexico",
+                        "NY": "New York",
+                        "NC": "North Carolina",
+                        "ND": "North Dakota",
+                        "OH": "Ohio",
+                        "OK": "Oklahoma",
+                        "OR": "Oregon",
+                        "PA": "Pennsylvania",
+                        "PR": "Puerto Rico",
+                        "RI": "Rhode Island",
+                        "SC": "South Carolina",
+                        "SD": "South Dakota",
+                        "TN": "Tennessee",
+                        "TX": "Texas",
+                        "UT": "Utah",
+                        "VT": "Vermont",
+                        "VA": "Virginia",
+                        "WA": "Washington",
+                        "WV": "West Virginia",
+                        "WI": "Wisconsin",
+                        "WY": "Wyoming"
+                    },
+                    "default_value": [
+                        "TX"
+                    ],
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 1,
+                    "ajax": 0,
+                    "return_format": "value",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_5eb1bea1ba065",
+                    "label": "Zip\/Postal Code",
+                    "name": "zip",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        },
+        {
+            "key": "field_5eb1bf888411e",
+            "label": "Social Networks",
+            "name": "ajp_social",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5eb1bfa38411f",
+                    "label": "Facebook Page URL",
+                    "name": "facebook",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_5eb1bfb384120",
+                    "label": "Twitter Username",
+                    "name": "twitter",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5eb1bfd984121",
+                    "label": "Instagram Username",
+                    "name": "instagram",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5eb1c00684122",
+                    "label": "LinkedIn Profile URL",
+                    "name": "linkedin",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_5eb1c01a84123",
+                    "label": "YouTube Profile URL",
+                    "name": "youtube",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "33.33",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "ajp_recommendation"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1588708123
+}

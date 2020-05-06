@@ -174,6 +174,7 @@ class Js_Combinator extends Abstract_Combinator {
 		'var inc_opt =',
 		'ad_block_',
 		'peepsotimedata',
+		'e.setAttribute(\'unselectable',
 	);
 
 	/**
@@ -564,9 +565,12 @@ class Js_Combinator extends Abstract_Combinator {
 
 		$tag_data = $this->create_temp_file_and_get_url( $new_content, 'combined-js', 'js' );
 
+		// Add defer attribute to combined script if the javascript async loaded is enabled.
+		$atts = Options::is_enabled( 'siteground_optimizer_optimize_javascript_async' ) ? 'defer' : '';
+
 		// Add combined script tag.
 		// phpcs:ignore 
-		return str_replace( '</body>', '<script src="' . $tag_data['url'] . '"></script>' . $move_after . '</body>', $html );
+		return str_replace( '</body>', '<script ' . $atts . ' src="' . $tag_data['url'] . '"></script>' . $move_after . '</body>', $html );
 	}
 
 	/**
