@@ -28,3 +28,8 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
  * Post types & taxonomies
  */
 require plugin_dir_path( __FILE__ ) . '/inc/post-types.php';
+
+/**
+ * Shortcodes
+ */
+require plugin_dir_path( __FILE__ ) . '/inc/shortcodes.php';

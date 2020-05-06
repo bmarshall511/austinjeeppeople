@@ -18,7 +18,7 @@ if ( ! function_exists('ajpevents_post_types') ) {
       'name'                  => _x( 'Events', 'Post Type General Name', 'ajpevents' ),
       'singular_name'         => _x( 'Event', 'Post Type Singular Name', 'ajpevents' ),
       'menu_name'             => __( 'Events', 'ajpevents' ),
-      'name_admin_bar'        => __( 'Company', 'ajpevents' ),
+      'name_admin_bar'        => __( 'Event', 'ajpevents' ),
       'archives'              => __( 'Event Archives', 'ajpevents' ),
       'attributes'            => __( 'Event Attributes', 'ajpevents' ),
       'parent_item_colon'     => __( 'Parent Event:', 'ajpevents' ),
