@@ -23,7 +23,7 @@
                     "name": "start",
                     "type": "date_time_picker",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "50",
@@ -260,5 +260,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1588730686
+    "modified": 1588856956
 }
