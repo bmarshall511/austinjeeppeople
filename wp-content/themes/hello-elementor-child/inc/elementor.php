@@ -53,3 +53,16 @@ add_action( 'elementor/query/comments_last_filter', function( $query ) {
     $query->set( 'orderby', 'post__in' );
   }
 });
+
+// featured_companies_filter Elementor query ID - Orders companies by featured
+add_action( 'elementor/query/featured_companies_filter', function( $query ) {
+  $query->set( 'meta_key', 'ajp_featured' );
+  $query->set( 'orderby', 'meta_value_num' );
+  $query->set( 'meta_query', [
+    [
+      'key'     => 'ajp_featured',
+      'value'   => 0,
+      'compare' => '>'
+    ]
+  ]);
+});

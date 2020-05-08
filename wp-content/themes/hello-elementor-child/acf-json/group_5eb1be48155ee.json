@@ -4,51 +4,89 @@
     "fields": [
         {
             "key": "field_5eb1c0740c7a4",
-            "label": "Logo",
-            "name": "ajp_logo",
-            "type": "image",
-            "instructions": "Upload the companies primary logo used on light backgrounds.",
+            "label": "Company Logos",
+            "name": "ajp_logos",
+            "type": "group",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "60",
                 "class": "",
                 "id": ""
             },
-            "return_format": "array",
-            "preview_size": "thumbnail",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": ""
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5eb565cf8513d",
+                    "label": "Primary",
+                    "name": "primary",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
+                },
+                {
+                    "key": "field_5eb565f28513e",
+                    "label": "Alternate",
+                    "name": "alternate",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
+                }
+            ]
         },
         {
-            "key": "field_5eb1c0960c7a5",
-            "label": "Alternate Logo",
-            "name": "ajp_logo_alt",
-            "type": "image",
-            "instructions": "Optionally, upload an alternative logo used on dark backgrounds.",
+            "key": "field_5eb5662ca043a",
+            "label": "Featured",
+            "name": "ajp_featured",
+            "type": "number",
+            "instructions": "Featured companies are promoted to the top of listings throughout the site. Enter 0 to disable or a number to set the order of appearance.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "40",
                 "class": "",
                 "id": ""
             },
-            "return_format": "array",
-            "preview_size": "thumbnail",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": ""
+            "default_value": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": 1
         },
         {
             "key": "field_5eb1be5dba05f",
@@ -69,7 +107,7 @@
         {
             "key": "field_5eb1c27c84208",
             "label": "Contact Information",
-            "name": "contact_information",
+            "name": "ajp_contact_information",
             "type": "group",
             "instructions": "",
             "required": 0,
@@ -427,5 +465,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1588942871
+    "modified": 1588946797
 }
