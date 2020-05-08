@@ -66,3 +66,23 @@ add_action( 'elementor/query/featured_companies_filter', function( $query ) {
     ]
   ]);
 });
+
+// featured_events_filter Elementor query ID - Orders events by featured
+add_action( 'elementor/query/featured_events_filter', function( $query ) {
+  $query->set( 'meta_key', 'ajp_featured' );
+  $query->set( 'orderby', 'meta_value_num' );
+  $query->set( 'meta_query', [
+    'relation' => 'AND',
+    [
+      'key'     => 'ajp_featured',
+      'value'   => 0,
+      'compare' => '>'
+    ],
+    [
+      'key'     => 'ajp_date_start',
+      'value'   => date( 'Y-m-d H:i:s' ),
+      'compare' => '>=',
+      'type'    => 'CHAR'
+    ]
+  ]);
+});

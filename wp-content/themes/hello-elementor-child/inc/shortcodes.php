@@ -31,7 +31,7 @@ function hello_elementor_child_shortcode_complete_address() {
   }
 
   if ( ! empty( $address['city'] ) ) {
-    if ( $full_address ) { $full_address .= ' '; }
+    if ( $full_address ) { $full_address .= ', '; }
     $full_address .= $address['city'];
   }
 
