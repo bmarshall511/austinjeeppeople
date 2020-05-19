@@ -28,7 +28,7 @@ function ajp_sync_v1_sync_users() {
   if ( empty( $_REQUEST['sync_users'] ) || 'sync' != $_REQUEST['sync_users'] ) { return false; }
 
   $test_run = false;
-  $limit    = 5;
+  $limit    = ! empty( $_REQUEST['limit'] ) ? $_REQUEST['limit'] : 5;
 
   $log = [];
 
