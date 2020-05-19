@@ -21,6 +21,11 @@ require_once get_stylesheet_directory() . '/inc/tgm-plugin-activation.php';
 require_once get_stylesheet_directory() . '/inc/scripts.php';
 
 /**
+ * Include helpers.
+ */
+require_once get_stylesheet_directory() . '/inc/helpers.php';
+
+/**
  * Include admin functionality.
  */
 require_once get_stylesheet_directory() . '/inc/admin.php';
@@ -39,3 +44,13 @@ require_once get_stylesheet_directory() . '/inc/shortcodes.php';
  * Include Elementor functionality.
  */
 require_once get_stylesheet_directory() . '/inc/elementor.php';
+
+/**
+ * Include login functionality.
+ */
+require_once get_stylesheet_directory() . '/inc/login.php';
+
+/**
+ * Include bbpress functionality.
+ */
+require_once get_stylesheet_directory() . '/inc/bbpress.php';

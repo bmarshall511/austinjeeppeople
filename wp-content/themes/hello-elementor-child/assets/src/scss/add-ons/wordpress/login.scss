@@ -1,0 +1,107 @@
+////
+/// Contains all login styles.
+/// @group application
+/// @author Ben Marshall
+////
+
+// Import the SCSS & CSS variables & mixins.
+@import '../../core/core';
+
+/* stylelint-disable selector-no-qualifying-type, selector-max-id */
+body {
+  background: var(--body-background);
+  color: var(--body-font-color);
+  font-family: var(--body-font-family);
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: var(--input-font-family);
+}
+
+input[type=color],
+input[type=date],
+input[type=datetime-local],
+input[type=datetime],
+input[type=email],
+input[type=month],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=time],
+input[type=url],
+input[type=week],
+select,
+textarea {
+  border: var(--input-border);
+  border-radius: var(--global-radius);
+  color: var(--input-color);
+}
+
+a {
+  color: var(--anchor-color);
+  text-decoration: var(--anchor-text-decoration);
+
+  &:hover {
+    color: var(--anchor-color-hover);
+    text-decoration: var(--anchor-text-decoration-hover);
+  }
+}
+
+.login form .input,
+.login input[type=password],
+.login input[type=text] {
+  background: var(--input-background);
+  border: var(--input-border);
+  font-size: var(--input-font-size);
+}
+
+.login #backtoblog a,
+.login #nav a {
+  color: var(--anchor-color);
+}
+
+.login #backtoblog a:hover,
+.login #nav a:hover,
+.login h1 a:hover {
+  color: var(--anchor-color-hover);
+}
+
+.login form {
+  background: #151515;
+  border: 0;
+}
+
+.wp-core-ui .button-primary {
+  background-color: transparent;
+  border-color: var(--white);
+}
+
+.wp-core-ui .button,
+.wp-core-ui .button-primary,
+.wp-core-ui .button-secondary {
+  border-radius: 0;
+  border-width: 1px;
+  font-family: var(--input-font-family);
+  font-weight: var(--global-weight-bold);
+  text-transform: uppercase;
+}
+
+.wp-core-ui .button-group.button-large .button,
+.wp-core-ui .button.button-large {
+  line-height: 1;
+  min-height: 0;
+  padding: 1.2em 1.6em;
+}
+
+.login #login_error,
+.login .message,
+.login .success {
+  background-color: #63614C;
+  color: var(--white);
+}
+/* stylelint-enable selector-no-qualifying-type, selector-max-id */

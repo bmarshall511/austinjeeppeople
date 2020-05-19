@@ -4,3 +4,52 @@
 /// @group application
 /// @author Ben Marshall
 ////
+
+/// Global font weight used for bold type.
+/// @type string
+/// @example scss
+///   font-weight: $global-weight-bold;
+///   font-weight: var(--global-weight-bold);
+$global-weight-bold: 700;
+
+/// Color used for dark gray UI items.
+/// @type color
+/// @example scss
+///   color: $dark-gray;
+///   color: var(--dark-gray);
+$dark-gray: #151515;
+
+/// Primary color of the application.
+/// @type color
+/// @example scss
+///   color: $primary-color;
+///   color: var(--primary-color);
+$primary-color: #b7d43d;
+
+/// Background color of the body.
+/// @type string
+/// @example scss
+///   background: $body-background;
+///   background: var(--body-background);
+$body-background: var(--black);
+
+/// Font stack of the body.
+/// @type string
+/// @example scss
+///   font-family: $body-font-family;
+///   font-family: var(--body-font-family);
+$body-font-family: 'Poppins', Sans-serif;
+
+/// Text color of the body.
+/// @type color
+/// @example scss
+///   color: $body-font-color;
+///   color: var(--body-font-color);
+$body-font-color: var(--white);
+
+/// Default color for links on hover.
+/// @type color
+/// @example scss
+///   color: $anchor-color-hover;
+///   color: var(--anchor-color-hover);
+$anchor-color-hover: #ceff00;

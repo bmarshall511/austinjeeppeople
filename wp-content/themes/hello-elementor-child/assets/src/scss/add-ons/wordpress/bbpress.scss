@@ -1,0 +1,20 @@
+////
+/// Contains all bbpress-specific styles.
+/// @group elementor
+/// @author Ben Marshall
+////
+
+// Import the SCSS & CSS variables & mixins.
+@import '../../core/core';
+
+/* stylelint-disable selector-max-id */
+#bbpress-forums {
+  font-size: var(--global-font-size);
+  line-height: var(--global-lineheight);
+  margin-bottom: 0;
+}
+
+#bbpress-forums li.bbp-header {
+  background: var(--dark-gray);
+}
+/* stylelint-enable selector-max-id */
