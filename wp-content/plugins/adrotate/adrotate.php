@@ -6,7 +6,7 @@ Author: Arnan de Gans
 Author URI: https://www.arnan.me/?pk_campaign=adrotatefree&pk_keyword=plugin_info
 Description: Monetise your website with adverts while keeping things simple. Start making money today!
 Text Domain: adrotate
-Version: 5.8.2
+Version: 5.8.4
 License: GPLv3
 */
 
@@ -21,7 +21,7 @@ License: GPLv3
 ------------------------------------------------------------------------------------ */
 
 /*--- AdRotate values ---------------------------------------*/
-define("ADROTATE_DISPLAY", '5.8.2');
+define("ADROTATE_DISPLAY", '5.8.4');
 define("ADROTATE_VERSION", 399);
 define("ADROTATE_DB_VERSION", 66);
 $plugin_folder = plugin_dir_path(__FILE__);
@@ -32,7 +32,7 @@ include_once($plugin_folder.'/adrotate-setup.php');
 include_once($plugin_folder.'/adrotate-manage-publisher.php');
 include_once($plugin_folder.'/adrotate-functions.php');
 include_once($plugin_folder.'/adrotate-statistics.php');
-include_once($plugin_folder.'/adrotate-export.php');
+require_once($plugin_folder.'/adrotate-portability.php');
 include_once($plugin_folder.'/adrotate-output.php');
 include_once($plugin_folder.'/adrotate-widget.php');
 /*-----------------------------------------------------------*/
@@ -170,6 +170,10 @@ function adrotate_manage() {
 	if(isset($_GET['file'])) $file = esc_attr($_GET['file']);
 	if(isset($_GET['view'])) $view = esc_attr($_GET['view']);
 	if(isset($_GET['ad'])) $ad_edit_id = esc_attr($_GET['ad']);
+	
+	if(!is_numeric($status)) $status = 0;
+	if(!is_numeric($ad_edit_id)) $ad_edit_id = 0;
+	
 	$now 			= adrotate_now();
 	$today 			= adrotate_date_start('day');
 	$in2days 		= $now + 172800;
@@ -292,6 +296,9 @@ function adrotate_manage_group() {
 	if(isset($_GET['view'])) $view = esc_attr($_GET['view']);
 	if(isset($_GET['group'])) $group_edit_id = esc_attr($_GET['group']);
 
+	if(!is_numeric($status)) $status = 0;
+	if(!is_numeric($group_edit_id)) $group_edit_id = 0;
+
 	if(isset($_GET['month']) AND isset($_GET['year'])) {
 		$month = esc_attr($_GET['month']);
 		$year = esc_attr($_GET['year']);
@@ -342,8 +349,8 @@ function adrotate_manage_group() {
 function adrotate_manage_schedules() {
 	global $wpdb, $adrotate_config;
 
-	$now 			= adrotate_now();
-	$in2days 		= $now + 172800;
+	$now = adrotate_now();
+	$in2days = $now + 172800;
 	?>
 	<div class="wrap">
 		<h1><?php _e('Schedules', 'adrotate'); ?></h1>
@@ -367,11 +374,14 @@ function adrotate_manage_schedules() {
 function adrotate_statistics() {
 	global $wpdb, $adrotate_config;
 
-	$status = $view = $id = $file = '';
+	$status = $view = $file = $id = '';
 	if(isset($_GET['status'])) $status = esc_attr($_GET['status']);
 	if(isset($_GET['view'])) $view = esc_attr($_GET['view']);
 	if(isset($_GET['id'])) $id = esc_attr($_GET['id']);
 	if(isset($_GET['file'])) $file = esc_attr($_GET['file']);
+
+	if(!is_numeric($status)) $status = 0;
+	if(!is_numeric($id)) $id = 0;
 
 	if(isset($_GET['month']) AND isset($_GET['year'])) {
 		$month = esc_attr($_GET['month']);
@@ -417,6 +427,8 @@ function adrotate_manage_media() {
 	if(isset($_GET['status'])) $status = esc_attr($_GET['status']);
 	if(isset($_GET['file'])) $file = esc_attr($_GET['file']);
 
+	if(!is_numeric($status)) $status = 0;
+
 	if(strlen($file) > 0 AND wp_verify_nonce($_REQUEST['_wpnonce'], 'adrotate_delete_media_'.$file)) {
 		if(adrotate_unlink($file)) {
 			$status = 206;
@@ -456,6 +468,7 @@ function adrotate_support() {
 	if(isset($_GET['status'])) $status = esc_attr($_GET['status']);
 	if(isset($_GET['file'])) $file = esc_attr($_GET['file']);
 
+	if(!is_numeric($status)) $status = 0;
 	$current_user = wp_get_current_user();
 
 	if(adrotate_is_networked()) {
@@ -487,7 +500,8 @@ function adrotate_options() {
 
     $active_tab = (isset($_GET['tab'])) ? esc_attr($_GET['tab']) : 'general';
 	$status = (isset($_GET['status'])) ? esc_attr($_GET['status']) : '';
-	$error = (isset($_GET['error'])) ? esc_attr($_GET['error']) : '';
+
+	if(!is_numeric($status)) $status = 0;
 
 	$action = (isset($_GET['action'])) ? esc_attr($_GET['action']) : '';
 	if($action == 'update-db') adrotate_check_upgrade();
@@ -497,7 +511,7 @@ function adrotate_options() {
 	<div class="wrap">
 	  	<h1><?php _e('AdRotate Settings', 'adrotate'); ?></h1>
 
-		<?php if($status > 0) adrotate_status($status, array('error' => $error)); ?>
+		<?php if($status > 0) adrotate_status($status); ?>
 
 		<h2 class="nav-tab-wrapper">  
             <a href="?page=adrotate-settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>"><?php _e('General', 'adrotate'); ?></a>  

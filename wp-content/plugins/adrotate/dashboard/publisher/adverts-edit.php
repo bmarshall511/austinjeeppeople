@@ -12,7 +12,7 @@
 if(!$ad_edit_id) {
 	$edit_id = $wpdb->get_var("SELECT `id` FROM `{$wpdb->prefix}adrotate` WHERE `type` = 'empty' ORDER BY `id` DESC LIMIT 1;");
 	if($edit_id == 0) {
-	    $wpdb->insert($wpdb->prefix."adrotate", array('title' => '', 'bannercode' => '', 'thetime' => $now, 'updated' => $now, 'author' => $userdata->user_login, 'imagetype' => 'dropdown', 'image' => '', 'tracker' => 'N', 'show_everyone' => 'Y', 'desktop' => 'Y', 'mobile' => 'Y', 'tablet' => 'Y', 'os_ios' => 'Y', 'os_android' => 'Y', 'os_other' => 'Y', 'type' => 'empty', 'weight' => 6, 'autodelete' => 'N', 'budget' => 0, 'crate' => 0, 'irate' => 0, 'state_req' => 'N', 'cities' => serialize(array()), 'states' => serialize(array()), 'cities' => serialize(array()), 'countries' => serialize(array())));
+	    $wpdb->insert($wpdb->prefix."adrotate", array('title' => '', 'bannercode' => '', 'thetime' => $now, 'updated' => $now, 'author' => $userdata->user_login, 'imagetype' => 'dropdown', 'image' => '', 'tracker' => 'N', 'show_everyone' => 'Y', 'desktop' => 'Y', 'mobile' => 'Y', 'tablet' => 'Y', 'os_ios' => 'Y', 'os_android' => 'Y', 'os_other' => 'Y', 'type' => 'empty', 'weight' => 6, 'autodelete' => 'N', 'budget' => 0, 'crate' => 0, 'irate' => 0, 'state_req' => 'N', 'cities' => serialize(array()), 'states' => serialize(array()), 'countries' => serialize(array())));
 	    $edit_id = $wpdb->insert_id;
 
 		$wpdb->insert($wpdb->prefix.'adrotate_schedule', array('name' => 'Schedule for ad '.$edit_id, 'starttime' => $now, 'stoptime' => $in84days, 'maxclicks' => 0, 'maximpressions' => 0, 'spread' => 'N', 'daystarttime' => '0000', 'daystoptime' => '0000', 'day_mon' => 'Y', 'day_tue' => 'Y', 'day_wed' => 'Y', 'day_thu' => 'Y', 'day_fri' => 'Y', 'day_sat' => 'Y', 'day_sun' => 'Y', 'autodelete' => 'N'));
@@ -42,7 +42,7 @@ if($edit_banner) {
 	foreach($linkmeta as $meta) {
 		$meta_array[] = $meta->group;
 	}
-	
+
 	if($ad_edit_id) {
 		if($edit_banner->type != 'empty') {
 			// Errors
@@ -214,19 +214,6 @@ if($edit_banner) {
 		        <td width="35%">[adrotate banner="<?php echo $edit_banner->id; ?>"]</td>
 		        <th width="15%"><?php _e('Directly in a theme', 'adrotate'); ?></th>
 		        <td>&lt;?php echo adrotate_ad(<?php echo $edit_banner->id; ?>); ?&gt;</td>
-	      	</tr>
-	      	</tbody>
-		</table>
-	
-		<h2><?php _e('Get contextual adverts from Media.net', 'adrotate'); ?></h2>
-		<table class="widefat" style="margin-top: .5em">
-			<tbody>
-	      	<tr>
-		        <th width="40%"><center><a href="https://ajdg.solutions/go/medianet/" target="_blank"><img src="<?php echo plugins_url("../images/offers/medianet.jpg", dirname(__FILE__)); ?>" width="440" /></a></center></th>
-		        <td>
-			        <p><a href="https://ajdg.solutions/go/medianet/" target="_blank">Media.net</a> is the <strong>#2 largest contextual ads platform</strong> in the world that provides its publishers with an <strong>exclusive access to the Yahoo! Bing Network of advertisers and $6bn worth of search demand.</strong></p>
-		        	<p><a href="https://ajdg.solutions/go/medianet/" target="_blank">Media.net</a> <strong>ads are contextual</strong> and hence always relevant to your content. They are also <strong>native by design</strong> and highly customizable, delivering a great user experience and higher CTRs.</p>
-				</td>
 	      	</tr>
 	      	</tbody>
 		</table>
@@ -519,6 +506,20 @@ if($edit_banner) {
 			<a href="admin.php?page=adrotate-ads&view=manage" class="button"><?php _e('Cancel', 'adrotate'); ?></a>
 		</p>
 		<?php } ?>
+
+		<?php if($edit_banner->type != 'empty') { ?>
+		<h2><?php _e('Portability', 'adrotate'); ?></h2>
+		<p><em><?php _e('This long code is your advert. It includes all settings from above except the schedule and group selection. You can import this hash into another setup of AdRotate or AdRotate Professional. Do not alter the hash or the advert will not work. In most browsers you can tripleclick in the field to select the whole thing. You can paste the hash into the \'Advert Hash\' field in the Advert Generator of another AdRotate setup.', 'adrotate'); ?></em></p>
+		<table class="widefat" style="margin-top: .5em">
+			<tbody>
+	      	<tr>
+		        <th width="15%" valign="top"><?php _e('Advert hash', 'adrotate'); ?></th>
+		        <td colspan="3"><textarea tabindex="2" id="adrotate_portable" name="adrotate_portable" cols="70" rows="5" class="ajdg-fullwidth"><?php echo adrotate_portable_hash('export', $edit_banner); ?></textarea></td>
+	      	</tr>
+	      	</tbody>
+		</table>
+		<?php } ?>		  	
+
 	</form>
 <?php
 } else {

@@ -86,5 +86,4 @@
 		<?php } ?>
 			</tbody>
 	</table>
-	<center><?php _e('Get more features with AdRotate Pro.', 'adrotate'); ?> <a href="admin.php?page=adrotate-pro"><?php _e('Upgrade now', 'adrotate'); ?></a>!</center>
 </form>

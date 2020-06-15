@@ -4,7 +4,7 @@ Tags: page-builder, elementor, loop, archive list, post widget, skin, custom, po
 Donate link: https://www.paypal.me/dudaster
 Requires at least: 5.0
 Tested up to: 5.4.2
-Stable tag: 2.1.0
+Stable tag: 2.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,6 +15,10 @@ Create new skins for Elementor PRO 2.x page builder. Design your own skins for P
 This plugin adds new skin to Elementor Page Builder Posts and Posts Archive widget.
 
 You can design a loop item just like a single template and it would be used as a skin so you can be able to create a post grid the way you like.
+
+New in version 2.2.0
+
+Go to Pagination and you'll see "Load moare" pagination. It will load the posts trough AJAX. No more boring pagination. 
 
 New in version 2.0.0 
 
@@ -66,8 +70,22 @@ Add to your template a Post or Post Archive widget and from Skins select Custom 
 
 == Changelog ==
 
+= 2.2.2 =
+* Fixed jQuery ajax dependecies.
+* Added a timeout for preview for speed improvement.
+* Fixed Astra theme css issues.
+* Fixed AJAX charset issue.
+
+= 2.2.1 =
+* Fixed issue with Ajax call from third party plugins like Smart Filter.
+
+= 2.2.0 =
+* NEW!!! Ajax pagination. Now you can go to Pagination Section in Posts / Archive Posts Widgets and select "Load more" pagination.
+* Solved issue with multiple Custom Grid in one page.
+* Solving Astra Theme Issues with Post Items width shrinkage.
+
 = 2.1.0 =
-* Solved Error issue with Dynamic Button Link.
+* Solved Error issue with Dynamic Button Link. 
 * Solving Astra Theme Issues with Post Items Padding and bordering
 * Post Title made visible again inside Post Items
 * Solved problem with Forms not being sent.

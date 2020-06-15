@@ -19,40 +19,24 @@
 		<div id="wpo_min_jsprocessed">
 			<ul class="processed">
 				<?php
+					$processed_js = 0;
 					// Some files exist
-					if ($files && isset($files['js']) && is_array($files['js']) && $files['js']) :
-						foreach ($files['js'] as $js_file) :
-							?>
-							<li id="<?php echo $js_file['uid']; ?>">
-								<span class="filename"><?php echo $js_file['filename']; ?> (<?php echo $js_file['fsize']; ?>)</span>
-								<a href="#" class="log"><?php _e('Show information', 'wp-optimize'); ?></a>
-								<div class="hidden wpo_min_log"><?php
-								if ($js_file['log']) {
-									WP_Optimize()->include_template(
-										'minify/cached-file-log.php',
-										false,
-										array(
-											'log' => $js_file['log']
-										)
-									);
-								}
-								?></div>
-							</li>
-						<?php endforeach;
-					// No files were found
-					elseif ($files && isset($files['js']) && is_array($files['js']) && !$files['js']) :
+					if ($files && isset($files['js']) && is_array($files['js']) && $files['js']) {
+						$processed_js = count($files['js']);
+						foreach ($files['js'] as $js_file) {
+							WP_Optimize()->include_template(
+								'minify/cached-file.php',
+								false,
+								array(
+									'file' => $js_file
+								)
+							);
+						}
+					}
 				?>
-					<li class="no-files-yet">
-						<span class="filename"><?php _e('There are no processed files to display.', 'wp-optimize'); ?></span>
-					</li>
-				<?php
-					// The file list will be loaded via JS
-					else :
-				?>
-					<li class="no-files-yet">
-						<span class="filename">...</span>
-					</li>
-					<?php endif; ?>
+				<li class="no-files-yet<?php echo $processed_js ? ' hidden' : ''; ?>">
+					<span class="filename"><?php _e('There are no processed files yet.', 'wp-optimize'); ?></span>
+				</li>
 			</ul>
 		</div>
 
@@ -63,40 +47,24 @@
 		<?php else : ?>
 			<ul class="processed">
 				<?php
-					if ($files && isset($files['css']) && is_array($files['css']) && $files['css']) :
-					foreach ($files['css'] as $css_file) :
-						?>
-							<li id="<?php echo $css_file['uid']; ?>">
-								<span class="filename"><?php echo $css_file['filename']; ?> (<?php echo $css_file['fsize']; ?>)</span>
-								<a href="#" class="log"><?php _e('Show information', 'wp-optimize'); ?></a>
-								<div class="hidden wpo_min_log"><?php
-								if ($css_file['log']) {
-									WP_Optimize()->include_template(
-										'minify/cached-file-log.php',
-										false,
-										array(
-											'log' => $css_file['log']
-										)
-									);
-								}
-								?></div>
-							</li>
-						<?php
-					endforeach;
+					$processed_css = 0;
+					if ($files && isset($files['css']) && is_array($files['css']) && $files['css']) {
+						$processed_css = count($files['css']);
+						foreach ($files['css'] as $css_file) {
+							WP_Optimize()->include_template(
+								'minify/cached-file.php',
+								false,
+								array(
+									'file' => $css_file
+								)
+							);
+						}
+					}
 					// No files were found
-					elseif ($files && isset($files['css']) && is_array($files['css']) && !$files['css']) :
 				?>
-					<li class="no-files-yet">
-						<span class="filename"><?php _e('There are no processed files to display.', 'wp-optimize'); ?></span>
-					</li>
-				<?php
-					// The file list will be loaded via JS
-					else :
-				?>
-					<li class="no-files-yet">
-						<span class="filename">...</span>
-					</li>
-					<?php endif; ?>
+				<li class="no-files-yet<?php echo $processed_css ? ' hidden' : ''; ?>">
+					<span class="filename"><?php _e('There are no processed files yet.', 'wp-optimize'); ?></span>
+				</li>
 			</ul>
 		<?php endif; ?>
 		</div>		
@@ -120,6 +88,7 @@
 				<?php _e('Enable debug mode', 'wp-optimize'); ?>
 			</label>
 		</div>
+		<p><?php _e('Enabling the debug mode will add various comments and show more information in the files list.', 'wp-optimize'); ?> <?php _e('It also adds extra actions in the status tab.', 'wp-optimize'); ?></p>
 	</div>
 
 	<form method="post" action="#">
@@ -142,13 +111,13 @@
 				<?php _e('Edit default exclusions', 'wp-optimize'); ?>
 			</label>
 		</div>
-		<p><?php _e('By default, WP-Optimize excludes a list of files that are known to cause problems when minified.'); ?>
+		<p><?php _e('By default, WP-Optimize excludes a list of files that are known to cause problems when minified or combined.'); ?>
 		<?php _e('Enable this option to see or edit those files.'); ?></p>
 		<div class="wpo-minify-default-exclusions<?php echo $wpo_minify_options['edit_default_exclutions'] ? '' : ' hidden'; ?>">
 			<h3><?php _e('Known incompatible files', 'wp-optimize'); ?></h3>
 			<fieldset>
 				<label for="ignore_list">
-					<?php _e('This is a list of files that can\'t or shouldn\'t be minified.', 'wp-optimize'); ?>
+					<?php _e('List of files that can\'t or shouldn\'t be minified or merged.', 'wp-optimize'); ?>
 					<?php _e('Do not edit this if you are not sure what it is.', 'wp-optimize'); ?>
 					<span tabindex="0" data-tooltip="<?php esc_attr_e('Files that have been consistently reported by other users to cause trouble when merged', 'wp-optimize');?>"><span class="dashicons dashicons-editor-help"></span> </span>
 				</label>
@@ -165,9 +134,9 @@
 			<h3><?php _e('IE incompatible files', 'wp-optimize'); ?></h3>
 			<fieldset>
 				<label for="blacklist">
-					<?php _e('This is a list of files used for IE compatibility, They are excluded from minification.', 'wp-optimize'); ?>
+					<?php _e('List of excluded files used for IE compatibility.', 'wp-optimize'); ?>
 					<?php _e('Do not edit this if you\'re not sure what it is.', 'wp-optimize'); ?>
-					<span tabindex="0" data-tooltip="<?php esc_attr_e('Usually, any IE CSS files that should always be ignored without incrementing the groups', 'wp-optimize');?>"><span class="dashicons dashicons-editor-help"></span> </span>
+					<span tabindex="0" data-tooltip="<?php esc_attr_e('Any CSS files that should always be ignored.', 'wp-optimize');?>"><span class="dashicons dashicons-editor-help"></span> </span>
 				</label>
 				<textarea
 					name="blacklist"
@@ -241,6 +210,7 @@
 						id="hpreconnect"
 						class="large-text code"
 						placeholder="https://cdn.example.com"
+						disabled
 					><?php echo $wpo_minify_options['hpreconnect']; ?></textarea>
 					<p>
 						<?php _e('Use the complete scheme (http:// or https://) followed by the domain name only (no file paths).', 'wp-optimize'); ?>
@@ -268,6 +238,7 @@
 						cols="50"
 						id="hpreload"
 						class="large-text code"
+						disabled
 						placeholder="Link: &lt;https://cdn.example.com/s/font/v15/somefile.woff&gt;; rel=preload; as=font; crossorigin"
 					><?php echo $wpo_minify_options['hpreload']; ?></textarea>
 					<p>

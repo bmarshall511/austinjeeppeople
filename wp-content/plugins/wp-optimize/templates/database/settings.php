@@ -14,6 +14,8 @@
 		
 		<?php wp_nonce_field('wpo_optimization', '_wpnonce_db_settings'); ?>
 
+		<div class="wp-optimize-settings-save-results"></div>
+
 		<input id="wp-optimize-save-database-settings" class="button button-primary wpo-save-settings" type="submit" name="wp-optimize-settings" value="<?php esc_attr_e('Save settings', 'wp-optimize'); ?>" />
 		
 		<img class="wpo_spinner wpo-saving-settings" src="<?php echo esc_attr(admin_url('images/spinner-2x.gif')); ?>" alt="...">

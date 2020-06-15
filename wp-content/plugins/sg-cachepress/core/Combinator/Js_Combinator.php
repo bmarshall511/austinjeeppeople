@@ -16,6 +16,11 @@ class Js_Combinator extends Abstract_Combinator {
 	 * @var array Array containing all excluded inline content.
 	 */
 	private $excluded_inline_content = array(
+		'var side_feed',
+		'tdbSearchItem.blockUid = \'t',
+		'_initLayerSlider',
+		'var quickViewNonce',
+		'getElementById("eeb-',
 		'function reenableButton',
 		'bs_ajax_paginate_',
 		'subscribe-field',
@@ -175,6 +180,7 @@ class Js_Combinator extends Abstract_Combinator {
 		'ad_block_',
 		'peepsotimedata',
 		'e.setAttribute(\'unselectable',
+		'function auxinNS(n)',
 	);
 
 	/**
@@ -412,6 +418,8 @@ class Js_Combinator extends Abstract_Combinator {
 	private $combined_scripts_exclude_handles = array(
 		'jquery',
 		'jquery-core',
+		'wc-authorize-net-cim',
+		'sv-wc-payment-gateway-payment-form',
 	);
 
 	/**
@@ -530,7 +538,7 @@ class Js_Combinator extends Abstract_Combinator {
 			}
 
 			// Replace the site url and get the src.
-			$excluded[] = str_replace( Helper::get_site_url(), '', strtok( wp_scripts()->registered[ $handle ]->src, '?' ) );
+			$excluded[] = trim( str_replace( Helper::get_site_url(), '', strtok( wp_scripts()->registered[ $handle ]->src, '?' ) ), '/\\' );
 		}
 
 		// Set the excluded urls.
@@ -736,7 +744,8 @@ class Js_Combinator extends Abstract_Combinator {
 			}
 		} else {
 			$src = Front_End_Optimization::remove_query_strings( $src );
-			if ( in_array( str_replace( untrailingslashit( Helper::get_site_url() ), '', $src ), $this->excluded_urls ) ) {
+
+			if ( in_array( str_replace( trailingslashit( Helper::get_site_url() ), '', $src ), $this->excluded_urls ) ) {
 				return true;
 			}
 

@@ -32,7 +32,9 @@ class WP_Optimize_Minify_Commands {
 	public function purge_all_minify_cache() {
 		if (!WPO_MINIFY_PHP_VERSION_MET) return array('error' => __('WP-Optimize Minify requires a higher PHP version', 'wp-optimize'));
 		WP_Optimize_Minify_Cache_Functions::purge();
+		WP_Optimize_Minify_Cache_Functions::cache_increment();
 		$others = WP_Optimize_Minify_Cache_Functions::purge_others();
+		$files = $this->get_minify_cached_files();
 		$message = array(
 			__('The minification cache was deleted.', 'wp-optimize'),
 			strip_tags($others, '<strong>'),
@@ -40,7 +42,8 @@ class WP_Optimize_Minify_Commands {
 		$message = array_filter($message);
 		return array(
 			'success' => true,
-			'message' => implode("\n", $message)
+			'message' => implode("\n", $message),
+			'files' => $files
 		);
 	}
 
@@ -52,8 +55,10 @@ class WP_Optimize_Minify_Commands {
 	public function minify_increment_cache() {
 		if (!WPO_MINIFY_PHP_VERSION_MET) return array('error' => __('WP-Optimize Minify requires a higher PHP version', 'wp-optimize'));
 		WP_Optimize_Minify_Cache_Functions::cache_increment();
+		$files = $this->get_minify_cached_files();
 		return array(
-			'success' => true
+			'success' => true,
+			'files' => $files
 		);
 	}
 
@@ -69,6 +74,7 @@ class WP_Optimize_Minify_Commands {
 		$state = WP_Optimize_Minify_Cache_Functions::purge_temp_files();
 		$old = WP_Optimize_Minify_Cache_Functions::purge_old();
 		$others = WP_Optimize_Minify_Cache_Functions::purge_others();
+		$files = $this->get_minify_cached_files();
 
 		$notice = array(
 			__('All caches from WP-Optimize Minify have been purged.', 'wp-optimize'),
@@ -82,7 +88,8 @@ class WP_Optimize_Minify_Commands {
 			'others' => $others,
 			'state' => $state,
 			'message' => $notice,
-			'old' => $old
+			'old' => $old,
+			'files' => $files
 		);
 	}
 
@@ -116,10 +123,10 @@ class WP_Optimize_Minify_Commands {
 				'error' => 'failed to save'
 			);
 		}
-		WP_Optimize_Minify_Cache_Functions::cache_increment();
-		WP_Optimize_Minify_Cache_Functions::purge_others();
+		$purged = $this->purge_minify_cache();
 		return array(
-			'success' => true
+			'success' => true,
+			'files' => $purged['files']
 		);
 	}
 

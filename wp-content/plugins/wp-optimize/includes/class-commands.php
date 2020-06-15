@@ -136,6 +136,15 @@ class WP_Optimize_Commands {
 	}
 
 	/**
+	 * Wipe settings command.
+	 *
+	 * @return bool|false|int
+	 */
+	public function wipe_settings() {
+		return $this->options->wipe_settings();
+	}
+
+	/**
 	 * Save lazy load settings.
 	 *
 	 * @param string $data
@@ -301,10 +310,12 @@ class WP_Optimize_Commands {
 	/**
 	 * Get the data for the tables tab
 	 *
+	 * @param array $data
 	 * @return array
 	 */
-	public function get_table_list() {
-		
+	public function get_table_list($data = array()) {
+		if (isset($data['refresh_plugin_json']) && filter_var($data['refresh_plugin_json'], FILTER_VALIDATE_BOOLEAN)) WP_Optimize()->get_db_info()->update_plugin_json();
+
 		list ($total_size, $part2) = $this->optimizer->get_current_db_size();
 	
 		return apply_filters('wpo_get_tables_data', array(

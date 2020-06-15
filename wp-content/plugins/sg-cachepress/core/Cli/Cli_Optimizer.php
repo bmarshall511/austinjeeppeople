@@ -169,6 +169,10 @@ class Cli_Optimizer {
 			'siteground_optimizer_lazyload_thumbnails',
 			'siteground_optimizer_lazyload_responsive',
 			'siteground_optimizer_lazyload_textwidgets',
+			'siteground_optimizer_lazyload_woocommerce',
+			'siteground_optimizer_lazyload_shortcodes',
+			'siteground_optimizer_lazyload_videos',
+			'siteground_optimizer_lazyload_iframes',
 		);
 
 		$status = array();

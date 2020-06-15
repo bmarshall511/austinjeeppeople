@@ -33,6 +33,7 @@ class Front_End_Optimization {
 		'moxiejs',
 		'wc-square',
 		'wc-braintree',
+		'wc-authorize-net-cim',
 		'sv-wc-payment-gateway-payment-form',
 	);
 

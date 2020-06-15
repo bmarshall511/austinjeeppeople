@@ -15,6 +15,22 @@
 		
 		<?php wp_nonce_field('wpo_optimization'); ?>
 
+		<h3 class="wpo-first-child"><?php _e('Wipe settings', 'wp-optimize'); ?></h3>
+
+		<div class="wpo-fieldgroup">
+			<p>
+				<small><?php _e('This button will delete all of WP-Optimize\'s settings. You will then need to enter all your settings again. You can also do this before deactivating/deinstalling WP-Optimize if you wish.', 'wp-optimize'); ?></small>
+				<br>
+				<br>
+				<input class="button wpo-wipe-settings" type="button" name="wp-optimize-wipe-settings" value="<?php esc_attr_e('Wipe settings', 'wp-optimize'); ?>" />
+
+				<img class="wpo_spinner" src="<?php echo esc_attr(admin_url('images/spinner-2x.gif')); ?>" alt="...">
+
+				<span class="dashicons dashicons-yes display-none save-done"></span>
+
+			</p>
+		</div>
+
 		<input class="button button-primary wpo-save-settings" type="submit" name="wp-optimize-settings" value="<?php esc_attr_e('Save settings', 'wp-optimize'); ?>" />
 		
 		<img class="wpo_spinner wpo-saving-settings" src="<?php echo esc_attr(admin_url('images/spinner-2x.gif')); ?>" alt="...">

@@ -30,33 +30,43 @@ function adrotate_generate_input() {
 		$new_window = '';
 		if(isset($_POST['adrotate_newwindow'])) $new_window = strip_tags(trim($_POST['adrotate_newwindow'], "\t\n "));	
 
-		if(current_user_can('adrotate_ad_manage')) {	
-			// Fullsize Image & figure out adwidth and adheight
-			$fullsize_size = @getimagesize(WP_CONTENT_URL."/".$adrotate_config['banner_folder']."/".$fullsize_image);
-			if($fullsize_size){
-				$adwidth = ' width="'.$fullsize_size[0].'"';
-				$adheight = ' height="'.$fullsize_size[1].'"';
+		$portability = '';
+		if(isset($_POST['adrotate_portability'])) $portability = strip_tags(trim($_POST['adrotate_portability'], "\t\n "));	
+
+		if(current_user_can('adrotate_ad_manage')) {
+			if(strlen($portability) == 0) {
+				// Fullsize Image & figure out adwidth and adheight
+				$fullsize_size = @getimagesize(WP_CONTENT_URL."/".$adrotate_config['banner_folder']."/".$fullsize_image);
+				if($fullsize_size){
+					$adwidth = ' width="'.$fullsize_size[0].'"';
+					$adheight = ' height="'.$fullsize_size[1].'"';
+				} else {
+					$adwidth = $adheight = '';
+				}
+	
+				// Open in a new window?
+				if(isset($new_window) AND strlen($new_window) != 0) {
+					$new_window = ' target="_blank"';
+				} else {
+					$new_window = '';
+				}
+	
+				// Determine image settings
+				$imagetype = "dropdown";
+				$image = WP_CONTENT_URL."/%folder%/".$fullsize_image;
+				$asset = "<img src=\"%asset%\"".$adwidth.$adheight." />";
+	
+				// Generate code
+				$bannercode = "<a href=\"".$targeturl."\"".$new_window.">".$asset."</a>";
+	
+				// Save the advert to the DB
+				$wpdb->update($wpdb->prefix.'adrotate', array('bannercode' => $bannercode, 'imagetype' => $imagetype, 'image' => $image), array('id' => $id));
 			} else {
-				$adwidth = $adheight = '';
+				$portability = adrotate_portable_hash('import', $portability);
+
+				// Save the advert to the DB
+				$wpdb->update($wpdb->prefix.'adrotate', array('title' => $portability['title'], 'bannercode' => $portability['bannercode'], 'thetime' => $portability['thetime'], 'updated' => adrotate_now(), 'author' => $portability['author'],  'imagetype' => $portability['imagetype'], 'image' => $portability['image'], 'tracker' => $portability['tracker'], 'show_everyone' => $portability['show_everyone'], 'desktop' => $portability['desktop'], 'mobile' => $portability['mobile'], 'tablet' => $portability['tablet'], 'os_ios' => $portability['os_ios'], 'os_android' => $portability['os_android'], 'os_other' => $portability['os_other'], 'weight' => $portability['weight'], 'autodelete' => $portability['autodelete'], 'budget' => $portability['budget'], 'crate' => $portability['crate'], 'irate' => $portability['irate'], 'state_req' => $portability['state_req'], 'cities' => $portability['cities'], 'states' => $portability['states'], 'countries' => $portability['countries']), array('id' => $id));
 			}
-
-			// Open in a new window?
-			if(isset($new_window) AND strlen($new_window) != 0) {
-				$new_window = ' target="_blank"';
-			} else {
-				$new_window = '';
-			}
-
-			// Determine image settings
-			$imagetype = "dropdown";
-			$image = WP_CONTENT_URL."/%folder%/".$fullsize_image;
-			$asset = "<img src=\"%asset%\"".$adwidth.$adheight." />";
-
-			// Generate code
-			$bannercode = "<a href=\"".$targeturl."\"".$new_window.">".$asset."</a>";
-
-			// Save the ad to the DB
-			$wpdb->update($wpdb->prefix.'adrotate', array('bannercode' => $bannercode, 'imagetype' => $imagetype, 'image' => $image), array('id' => $id));
 
 			adrotate_return('adrotate-ads', 226, array('view' => 'edit', 'ad'=> $id));
 			exit;

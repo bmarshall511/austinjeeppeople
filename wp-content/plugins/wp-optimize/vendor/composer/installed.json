@@ -227,21 +227,21 @@
     },
     {
         "name": "monolog/monolog",
-        "version": "2.0.2",
-        "version_normalized": "2.0.2.0",
+        "version": "2.1.0",
+        "version_normalized": "2.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/Seldaek/monolog.git",
-            "reference": "c861fcba2ca29404dc9e617eedd9eff4616986b8"
+            "reference": "38914429aac460e8e4616c8cb486ecb40ec90bb1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c861fcba2ca29404dc9e617eedd9eff4616986b8",
-            "reference": "c861fcba2ca29404dc9e617eedd9eff4616986b8",
+            "url": "https://api.github.com/repos/Seldaek/monolog/zipball/38914429aac460e8e4616c8cb486ecb40ec90bb1",
+            "reference": "38914429aac460e8e4616c8cb486ecb40ec90bb1",
             "shasum": ""
         },
         "require": {
-            "php": "^7.2",
+            "php": ">=7.2",
             "psr/log": "^1.0.1"
         },
         "provide": {
@@ -252,11 +252,11 @@
             "doctrine/couchdb": "~1.0@dev",
             "elasticsearch/elasticsearch": "^6.0",
             "graylog2/gelf-php": "^1.4.2",
-            "jakub-onderka/php-parallel-lint": "^0.9",
             "php-amqplib/php-amqplib": "~2.4",
             "php-console/php-console": "^3.1.3",
+            "php-parallel-lint/php-parallel-lint": "^1.0",
             "phpspec/prophecy": "^1.6.1",
-            "phpunit/phpunit": "^8.3",
+            "phpunit/phpunit": "^8.5",
             "predis/predis": "^1.1",
             "rollbar/rollbar": "^1.3",
             "ruflin/elastica": ">=0.90 <3.0",
@@ -276,7 +276,7 @@
             "rollbar/rollbar": "Allow sending log messages to Rollbar",
             "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
         },
-        "time": "2019-12-20T14:22:59+00:00",
+        "time": "2020-05-22T08:12:19+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -364,17 +364,17 @@
     },
     {
         "name": "mrclay/minify",
-        "version": "3.0.9",
-        "version_normalized": "3.0.9.0",
+        "version": "3.0.10",
+        "version_normalized": "3.0.10.0",
         "source": {
             "type": "git",
             "url": "https://github.com/mrclay/minify.git",
-            "reference": "d2a3e8c1d203958b45f56c0a399714ee8b478a12"
+            "reference": "8dba84a2d24ae6382057a1215ad3af25202addb9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/mrclay/minify/zipball/d2a3e8c1d203958b45f56c0a399714ee8b478a12",
-            "reference": "d2a3e8c1d203958b45f56c0a399714ee8b478a12",
+            "url": "https://api.github.com/repos/mrclay/minify/zipball/8dba84a2d24ae6382057a1215ad3af25202addb9",
+            "reference": "8dba84a2d24ae6382057a1215ad3af25202addb9",
             "shasum": ""
         },
         "require": {
@@ -398,7 +398,7 @@
             "firephp/firephp-core": "Use FirePHP for Log messages",
             "meenie/javascript-packer": "Keep track of the Packer PHP port using Composer"
         },
-        "time": "2020-03-24T19:30:43+00:00",
+        "time": "2020-04-02T19:47:26+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -637,12 +637,12 @@
         "source": {
             "type": "git",
             "url": "git@source.updraftplus.com:team-updraft/common-libs.git",
-            "reference": "47f25f709a98b4c347980bc59e08dd809ee6b059"
+            "reference": "cc63f54b9e971b0f74eabef8956b66f85b3901c0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://source.updraftplus.com/api/v4/projects/team-updraft%2Fcommon-libs/repository/archive.zip?sha=47f25f709a98b4c347980bc59e08dd809ee6b059",
-            "reference": "47f25f709a98b4c347980bc59e08dd809ee6b059",
+            "url": "https://source.updraftplus.com/api/v4/projects/team-updraft%2Fcommon-libs/repository/archive.zip?sha=cc63f54b9e971b0f74eabef8956b66f85b3901c0",
+            "reference": "cc63f54b9e971b0f74eabef8956b66f85b3901c0",
             "shasum": ""
         },
         "require-dev": {
@@ -652,7 +652,7 @@
             "squizlabs/php_codesniffer": "3.4.*",
             "wp-coding-standards/wpcs": "2.1.*"
         },
-        "time": "2020-01-10T14:14:20+00:00",
+        "time": "2020-04-15T21:26:53+00:00",
         "type": "project",
         "installation-source": "source",
         "description": "These are the common libs used across all of our projects"

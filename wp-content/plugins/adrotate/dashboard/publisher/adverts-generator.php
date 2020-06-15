@@ -35,7 +35,7 @@ if($edit_banner) {
 	
 		<h2><?php _e('Generate Advert Code', 'adrotate'); ?></h2>
 		<p><?php _e('Use the Generator if you have received a target url, banner image and/or some separate files with a description on how to use those. The AdRotate Generator will take your bits and pieces and try to generate a working adcode from it.', 'adrotate'); ?></p>
-	
+		<p><?php _e('If you have an advert hash from another AdRotate or AdRotate Professional setup you can enter it in the Portability field. This feature is a bit of an experiment, but the basic function works.', 'adrotate'); ?></p>
 		<p><?php _e('If you have a complete and working ad code / ad tag you do not use the Generator. You can simply paste that code in the AdCode field when creating your advert. For example as provided by Media.net or Google AdSense among others.', 'adrotate'); ?></p>
 	
 		<h2><?php _e('Create your advert', 'adrotate'); ?></h2>
@@ -126,7 +126,7 @@ if($edit_banner) {
 					<label for="adrotate_newwindow"><input tabindex="6" type="checkbox" name="adrotate_newwindow" checked="1" /></label> <?php _e('Open the advert in a new window?', 'adrotate'); ?> <?php _e('(Recommended)', 'adrotate'); ?>
 		        </td>
 	 		</tr>
-		    	<tr>
+		    <tr>
 				<th valign="top"><?php _e('NoFollow', 'adrotate'); ?></th>
 		        <td>
 					<label for="adrotate_nofollow"><input tabindex="7" type="checkbox" name="adrotate_nofollow" disabled /></label> <?php _e('Tell crawlers and search engines not to follow the target website url?', 'adrotate'); ?> <?php _e('(Available in AdRotate Pro)', 'adrotate'); ?><br /><em><?php _e('Letting bots (Such as Googlebot) index paid links may negatively affect your SEO and PageRank.', 'adrotate'); ?></em>
@@ -140,6 +140,21 @@ if($edit_banner) {
 	 		</tr>
 			</tbody>
 	
+			<thead>
+			<tr>
+		        <th colspan="2"><strong><?php _e('Portability', 'adrotate'); ?></strong></th>
+			</tr>
+			</thead>
+			
+			<tbody>
+			<tr>
+		        <th valign="top"><?php _e('Advert hash', 'adrotate'); ?></th>
+		        <td>
+					<textarea tabindex="2" id="adrotate_portability" name="adrotate_portability" cols="70" rows="5" class="ajdg-fullwidth" placeholder="<?php _e('To import a ready made advert, enter a advert hash from another AdRotate setup...', 'adrotate'); ?>"></textarea>
+		        </td>
+	 		</tr>
+			</tbody>
+
 		</table>
 	
 		<p class="submit">
@@ -147,7 +162,7 @@ if($edit_banner) {
 			<a href="admin.php?page=adrotate-ads&view=manage" class="button"><?php _e('Cancel', 'adrotate'); ?></a> <?php _e('Always test your adverts before activating them.', 'adrotate'); ?>
 		</p>
 	
-		<p><em><strong><?php _e('NOTE:', 'adrotate'); ?></strong> <?php _e('While the Code Generator has been tested and works, code generation, as always, is a interpretation of user input. If you provide the correct bits and pieces, a working advert may be generated. If you leave fields empty or insert the wrong info you probably end up with a broken advert.', 'adrotate'); ?><br /><?php _e('Based on your input and experiences later iterations of the Code Generator will be better and more feature rich.', 'adrotate'); ?></em></p>
+		<p><em><strong><?php _e('Caution:', 'adrotate'); ?></strong> <?php _e('While the Code Generator has been tested and works, code generation, as always, is a interpretation of user input. If you provide the correct bits and pieces, a working advert may be generated. If you leave fields empty or insert the wrong info you probably end up with a broken advert.', 'adrotate'); ?><br /><strong><?php _e('NOTE:', 'adrotate'); ?></strong> <?php _e('If you insert an Advert Hash, all other fields are ignored.', 'adrotate'); ?></em></p>
 	</form>
 <?php
 } else {

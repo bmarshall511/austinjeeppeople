@@ -159,7 +159,7 @@ class Css_Combinator extends Abstract_Combinator {
 			}
 
 			// Replace the site url and get the src.
-			$excluded[] = str_replace( Helper::get_site_url(), '', strtok( $wp_styles->registered[ $handle ]->src, '?' ) );
+			$excluded[] = trim( str_replace( Helper::get_site_url(), '', strtok( $wp_styles->registered[ $handle ]->src, '?' ) ), '/\\' );
 		}
 
 		// Set the excluded urls.
@@ -199,7 +199,7 @@ class Css_Combinator extends Abstract_Combinator {
 		$src  = Front_End_Optimization::remove_query_strings( $style[2] );
 
 		// Bail if the url is excluded.
-		if ( in_array( str_replace( Helper::get_site_url(), '', $src ), $this->excluded_urls ) ) {
+		if ( in_array( str_replace( trailingslashit( Helper::get_site_url() ), '', $src ), $this->excluded_urls ) ) {
 			return true;
 		}
 

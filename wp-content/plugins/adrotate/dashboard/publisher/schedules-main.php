@@ -10,7 +10,7 @@
 ------------------------------------------------------------------------------------ */
 ?>
 <h2><?php _e('Manage Schedules', 'adrotate'); ?></h2>
-	<p><?php _e('In AdRotate Pro you can schedule adverts for multiple periods of time. One schedule can be assigned to many adverts allowing you to manage multi advert campaigns easily. Schedules can be active on certain days of the week or on certain hours of the day.', 'adrotate'); ?> <?php _e('Get more features', 'adrotate'); ?> - <a href="admin.php?page=adrotate-pro"><?php _e('Get AdRotate Pro', 'adrotate'); ?></a>!</p>
+	<p><?php _e('In AdRotate Pro you can schedule adverts for multiple periods of time. One schedule can be assigned to many adverts allowing you to manage multi advert campaigns easily. Schedules can be active on certain days of the week or on certain hours of the day.', 'adrotate'); ?> <?php _e('Get more scheduling options with', 'adrotate'); ?> <a href="admin.php?page=adrotate-pro">AdRotate Pro</a>!</p>
 
 <form name="banners" id="post" method="post" action="admin.php?page=adrotate-schedules">
 	<?php wp_nonce_field('adrotate_bulk_schedules','adrotate_nonce'); ?>
@@ -85,8 +85,7 @@
 </table>
 <p><center>
 	<span style="border: 1px solid #c80; height: 12px; width: 12px; background-color: #fdefc3">&nbsp;&nbsp;&nbsp;&nbsp;</span> <?php _e("Expires soon.", "adrotate"); ?>
-	&nbsp;&nbsp;&nbsp;&nbsp;<span style="border: 1px solid #c00; height: 12px; width: 12px; background-color: #ffebe8">&nbsp;&nbsp;&nbsp;&nbsp;</span> <?php _e("Has expired.", "adrotate"); ?><br />
-	<?php _e('Get more features with AdRotate Pro', 'adrotate'); ?> - <a href="admin.php?page=adrotate-pro"><?php _e('Upgrade now', 'adrotate'); ?></a>!
+	&nbsp;&nbsp;&nbsp;&nbsp;<span style="border: 1px solid #c00; height: 12px; width: 12px; background-color: #ffebe8">&nbsp;&nbsp;&nbsp;&nbsp;</span> <?php _e("Has expired.", "adrotate"); ?>
 
 </center></p>
 </form>

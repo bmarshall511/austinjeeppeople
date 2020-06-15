@@ -11,7 +11,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "60",
                 "class": "",
                 "id": ""
             },
@@ -52,6 +52,27 @@
                     "first_day": 1
                 }
             ]
+        },
+        {
+            "key": "field_5eb5b34ad4bf2",
+            "label": "Featured",
+            "name": "ajp_featured",
+            "type": "number",
+            "instructions": "Featured events are promoted to the top of listings throughout the site. Enter 0 to disable or a number to set the order of appearance.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "40",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": 1
         },
         {
             "key": "field_5eb20f63790e5",
@@ -260,5 +281,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1588856956
+    "modified": 1588966319
 }

@@ -182,7 +182,7 @@ class WPO_Cache_Config {
 		}
 
 		if ((!$only_if_present || file_exists($config_file)) && !file_put_contents($config_file, $config_content)) {
-			return false;
+			return new WP_Error('write_cache_config', sprintf(__('The cache configuration file could not be saved to the disk; please check the file/folder permissions of %s .', 'wp-optimize'), $config_file));
 		}
 
 		return true;

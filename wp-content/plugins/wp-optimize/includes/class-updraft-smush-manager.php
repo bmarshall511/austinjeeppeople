@@ -1212,6 +1212,7 @@ class Updraft_Smush_Manager extends Updraft_Task_Manager_1_2 {
 	public function clear_backup_images_directory($directory, $days_ago = 30) {
 
 		$directory = trailingslashit($directory);
+		$current_time = time();
 
 		if (preg_match('/(\d{4})\/(\d{2})\/$/', $directory, $match)) {
 
@@ -1264,6 +1265,10 @@ class Updraft_Smush_Manager extends Updraft_Task_Manager_1_2 {
 
 				if (is_dir($directory . $file)) {
 					$this->clear_backup_images_directory($directory . $file, $days_ago);
+				} elseif (is_file($directory . $file) && preg_match('/^.+-updraft-pre-smush-original\.\S{3,4}/i', $file)) {
+					// check the file time and compare with $days_ago.
+					$filedate_day = (int) filectime($directory . $file);
+					if ($filedate_day > 0 && ($current_time - $filedate_day) / 86400 >= $days_ago) unlink($directory . $file);
 				}
 
 				$file = readdir($handle);
@@ -1282,7 +1287,7 @@ class Updraft_Smush_Manager extends Updraft_Task_Manager_1_2 {
 
 		$back_up_delete_after_days = $this->options->get_option('back_up_delete_after_days', 50);
 
-		$upload_dir = wp_get_upload_dir();
+		$upload_dir = wp_upload_dir(null, false);
 		$base_dir = $upload_dir['basedir'];
 
 		$this->clear_backup_images_directory($base_dir, $back_up_delete_after_days);

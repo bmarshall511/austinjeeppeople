@@ -139,9 +139,9 @@ class Skin_Posts_ECS extends Skin_Base {
 		$this->remove_control( 'read_more_text' );
 		$this->remove_control( 'show_excerpt' );
 		$this->remove_control( 'excerpt_length' );
+    $this->remove_control( 'open_new_tab' );
       
 	}
-
 	private function get_post_id(){
 		return $this->pid;
 	}
@@ -237,6 +237,7 @@ class Skin_Posts_ECS extends Skin_Base {
       echo $this->grid[$i];
       echo "<!-- end part [".$i."] finishing -->";
     }
+    $this->grid_settings['current'] = 0;
 
   }
 
@@ -335,38 +336,54 @@ class Skin_Posts_ECS extends Skin_Base {
 
 	}
   
+    protected function ajax_pagination(){
+      $settings = $this->parent->get_settings();
+      $theme_document = \Elementor\Plugin::$instance->documents->get_current();
+      $page_limit = $settings['pagination_page_limit'] ? $settings['pagination_page_limit'] : 999;
+      $max_pages = $this->parent->get_query()->max_num_pages;
+      $max_num_pages = $page_limit < $max_pages ? $page_limit : $max_pages;
+      $args = [ 'current_page'  =>  $this->parent->get_current_page(),
+               'max_num_pages' => $max_num_pages,
+               'load_method' => $settings['pagination_type'],//or infinitescroll for pro
+               'widget_id' => $this->parent->get_id(),
+               'post_id' => get_the_id(),
+               'theme_id' => is_null($theme_document) ? '' : $theme_document->get_main_id(),
+               
+      ];
+
+      $pagination=json_encode($args);
+      return $pagination;
+    }
   
   	protected function render_loop_header() {
+      $parent_settings = $this->parent->get_settings();
+      $parent_settings[$this->get_id().'_post_slider'] = isset($parent_settings[$this->get_id().'_post_slider'])? $parent_settings[$this->get_id().'_post_slider'] : "";
 
-    $parent_settings = $this->parent->get_settings();
-    $parent_settings[$this->get_id().'_post_slider'] = isset($parent_settings[$this->get_id().'_post_slider'])? $parent_settings[$this->get_id().'_post_slider'] : "";
+      if($parent_settings[$this->get_id().'_post_slider'] == "yes") {
+        echo '<div class="swiper-container">';
+        $this->grid_settings['allow'] = false;
+      } else {// we don't use custom grid if slider is activated
+        if($parent_settings[$this->get_id().'_use_custom_grid'] == "yes" && $parent_settings[$this->get_id().'_custom_grid'] ){
+          $this->set_custom_grid($parent_settings[$this->get_id().'_custom_grid']);
+          $this->grid_settings['allow'] = true;
+        } else $this->grid_settings['allow'] = false;
+      }
+      $this->parent->add_render_attribute( 'container', [
+        'class' => [
+          'ecs-posts',
+          'elementor-posts-container',
+          'elementor-posts',
+           $parent_settings[$this->get_id().'_post_slider'] == "yes" ? 'swiper-wrapper' : "",
+           $this->grid_settings['allow'] ? "ecs-custom-grid" : '',
+          $parent_settings[$this->get_id().'_post_slider'] != "yes" && !$this->grid_settings['allow'] ? 'elementor-grid':'',
+          $this->get_container_class(),
+        ],
+         'data-settings' => [htmlentities($this->ajax_pagination(), ENT_QUOTES)],
+      ] );
 
-    if($parent_settings[$this->get_id().'_post_slider'] == "yes") {
-      echo '<div class="swiper-container">';
-      $this->grid_settings['allow'] = false;
-    } else {// we don't use custom grid if slider is activated
-      if($parent_settings[$this->get_id().'_use_custom_grid'] == "yes" && $parent_settings[$this->get_id().'_custom_grid'] ){
-        $this->set_custom_grid($parent_settings[$this->get_id().'_custom_grid']);
-        $this->grid_settings['allow'] = true;
-      } else $this->grid_settings['allow'] = false;
-    }
-      
-     $this->parent->add_render_attribute( 'container', [
-			'class' => [
-				'elementor-posts-container',
-				'elementor-posts',
-         $parent_settings[$this->get_id().'_post_slider'] == "yes" ? 'swiper-wrapper' : "",
-         $this->grid_settings['allow'] ? "ecs-custom-grid" : '',
-        $parent_settings[$this->get_id().'_post_slider'] != "yes" && !$this->grid_settings['allow'] ? 'elementor-grid':'',
-				$this->get_container_class(),
-			],
-		] );
-      
-      
-      
-		?>
-		<div <?php echo $this->parent->get_render_attribute_string( 'container' ); ?>>
-		<?php
+      ?>
+      <div <?php echo $this->parent->get_render_attribute_string( 'container' ); ?>>
+      <?php
 	}
 
 	protected function render_loop_footer() {
@@ -441,6 +458,56 @@ class Skin_Posts_ECS extends Skin_Base {
 		?>
 		<nav class="elementor-pagination" role="navigation" aria-label="<?php esc_attr_e( 'Pagination', 'elementor-pro' ); ?>">
 			<?php echo implode( PHP_EOL, $links ); ?>
+		</nav>
+		<?php
+
+    if ( 'loadmore' === $parent_settings['pagination_type'] ) {
+      $this->render_loadmore_button();    
+    }
+    if ( 'lazyload' === $parent_settings['pagination_type'] ) {
+      $this->render_lazyload_animation();
+    }
+   
+	}
+
+  protected function render_lazyload_animation() {
+		$settings =  $this->parent->get_settings();
+    $next_page = $this->parent->get_current_page()+1;
+    $next_page_link = trailingslashit( get_permalink() ) . '?page='.$next_page;
+    $animation = \ECS_Loading_Animation::get_lazy_load_animations_html($settings['lazyload_animation']);
+    $target= $this->parent->get_id();
+
+		?>
+		<nav class="ecs-lazyload elementor-pagination" data-targetid="<?php echo $target; ?>">
+            <?php echo $animation; ?>
+			<a href="<?php echo $next_page_link; ?>" >
+        &gt;
+      </a>
+		</nav>
+		<?php
+	}  
+  protected function render_loadmore_button() {
+		$settings =  $this->parent->get_settings();
+    $next_page = $this->parent->get_current_page()+1;
+    $next_page_link = trailingslashit( get_permalink() ) . '?page='.$next_page;
+    $class='';
+    $args = [ 'loading_text'  =>  $settings['loadmore_loading_text'],
+         'text' => $settings['loadmore_text'],//or infinitescroll for pro
+         'widget_id' => $this->parent->get_id(),
+
+    ];
+
+    $data=htmlentities(json_encode($args), ENT_QUOTES);
+
+		if ( $settings['loadmore_hover_animation'] ) {
+			$class = 'elementor-animation-' . $settings['loadmore_hover_animation'];
+		}
+
+		?>
+		<nav class="elementor-button-wrapper elementor-pagination ecs-load-more-button" data-settings="<?php echo $data; ?>">
+			<a href="<?php echo $next_page_link; ?>" class="elementor-button-link elementor-button <?php echo $class; ?>" role="button">
+				<span><?php echo $settings['loadmore_text']; ?></span>
+			</a>
 		</nav>
 		<?php
 	}

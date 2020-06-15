@@ -57,7 +57,8 @@
 						value="dynamic"
 						<?php checked('dynamic' === $wpo_minify_options['default_protocol']); ?>
 					>
-					<?php _e('Detect automatically', 'wp-optimize'); ?>
+					<?php _e('Same as home URL', 'wp-optimize'); ?> (<?php printf(__('Currently: %s', 'wp-optimize'), $default_protocol);?>)
+					<span tabindex="0" data-tooltip="<?php esc_attr_e('Uses your site\'s default protocol.', 'wp-optimize');?>"><span class="dashicons dashicons-editor-help"></span></span>
 				</label>
 				<label>
 					<input

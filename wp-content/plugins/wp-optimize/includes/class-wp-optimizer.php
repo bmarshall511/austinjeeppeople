@@ -21,7 +21,7 @@ class WP_Optimizer {
 	
 		$optimizations = array();
 		
-		$optimizations_dir = WPO_PLUGIN_MAIN_PATH.'/optimizations';
+		$optimizations_dir = WPO_PLUGIN_MAIN_PATH.'optimizations';
 		
 		if ($dh = opendir($optimizations_dir)) {
 			while (($file = readdir($dh)) !== false) {
@@ -106,10 +106,10 @@ class WP_Optimizer {
 
 		$optimization_class = apply_filters('wp_optimize_optimization_class', 'WP_Optimization_'.$which_optimization);
 		
-		if (!class_exists('WP_Optimization')) include_once(WPO_PLUGIN_MAIN_PATH.'/includes/class-wp-optimization.php');
+		if (!class_exists('WP_Optimization')) include_once(WPO_PLUGIN_MAIN_PATH.'includes/class-wp-optimization.php');
 	
 		if (!class_exists($optimization_class)) {
-			$optimization_file = WPO_PLUGIN_MAIN_PATH.'/optimizations/'.$which_optimization.'.php';
+			$optimization_file = WPO_PLUGIN_MAIN_PATH.'optimizations/'.$which_optimization.'.php';
 			$class_file = apply_filters('wp_optimize_optimization_class_file', $optimization_file);
 			if (!preg_match('/^[a-z]+$/', $which_optimization) || !file_exists($class_file)) {
 				return new WP_Error('no_such_optimization', __('No such optimization', 'wp-optimize'), $which_optimization);

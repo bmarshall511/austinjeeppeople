@@ -31,4 +31,26 @@ if ($optimize_db) {
 	<?php
 }
 
+?>
 
+<script type="text/html" id="tmpl-wpo-table-delete">
+	<h3><span class="dashicons dashicons-warning"></span> <?php _e('Are you sure?', 'wp-optimize'); ?></h3>
+	<div class="notice notice-warning">
+		<p><?php _e('WARNING - some plugins might not be detected as installed or activated if they are in unknown folders (for example premium plugins).', 'wp-optimize').' '.__('Only delete a table if you are sure of what you are doing, and after taking a backup.', 'wp-optimize'); ?></p>
+		<p><?php _e('If none of the plugins listed were ever installed on this website, you should not delete this table as it is likely to be used by an unlisted plugin.', 'wp-optimize'); ?></p>
+	</div>
+	<h4><?php printf(__('You are about to remove the table %s.', 'wp-optimize'), '<span class="table-name">{{data.table_name}}</span>'); ?></h4>
+	<div class="wpo-table-delete--plugins">
+		{{{data.plugins_list}}}
+	</div>
+	<# if (data.no_backup) { #>
+		<p class="no-backup-detected">
+			<input type="checkbox" id="confirm_deletion_without_backup"> <strong><?php _e('No automatic backup was detected.', 'wp-optimize'); ?></strong> <?php _e('I confirm that I will be able to revert the changes if needed.', 'wp-optimize'); ?>
+		</p>
+	<# } #>
+	<p>
+		<input type="checkbox" id="confirm_table_deletion"> <?php _e('I confirm that I have understood the risks in doing that, and that I know what I am doing.', 'wp-optimize'); ?>
+	</p>
+	<button type="button" class="button button-primary delete-table" disabled><?php _e('Remove the table', 'wp-optimize'); ?></button>
+	<button type="button" class="button cancel wpo-modal--close"><?php _e('Cancel', 'wp-optimize'); ?></button>
+</script>

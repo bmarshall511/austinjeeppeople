@@ -9,7 +9,7 @@ class WP_Optimize_Minify_Fonts {
 	 */
 	public static function get_google_fonts() {
 		// https://www.googleapis.com/webfonts/v1/webfonts?sort=alpha
-		$google_fonts_file = WPO_PLUGIN_MAIN_PATH.'/google-fonts.json';
+		$google_fonts_file = WPO_PLUGIN_MAIN_PATH.'google-fonts.json';
 		if (is_file($google_fonts_file) && is_readable($google_fonts_file)) {
 			return json_decode(file_get_contents($google_fonts_file), true);
 		}

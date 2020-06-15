@@ -651,7 +651,7 @@ function adrotate_dashboard_error() {
 	if(is_dir(WP_PLUGIN_DIR."/adrotate-pro/")) {
 		$error['adrotate_exists'] = __('You have AdRotate Professional installed. Please switch to AdRotate Pro! You can delete this plugin after AdRotate Pro is activated.', 'adrotate-pro').' <a href="'.admin_url('/plugins.php?s=adrotate&plugin_status=all').'">'.__('Switch plugins', 'adrotate-pro').'</a>.';
 	}
-	if(is_dir(WP_PLUGIN_DIR."/adrotate_new/") OR is_dir(WP_PLUGIN_DIR."/adrotate-pro_new/") OR is_dir(WP_PLUGIN_DIR."/adrotate_old/") OR is_dir(WP_PLUGIN_DIR."/adrotate-pro_old/")) {
+	if(basename(__DIR__) != 'adrotate' AND basename(__DIR__) != 'adrotate-pro') {
 		$error['adrotate_folder_names'] = __('Something is wrong with your installation of AdRotate. Either the plugin is installed twice or your current installation has the wrong folder name. Please install the plugin properly!', 'adrotate-pro').' <a href="https://ajdg.solutions/support/adrotate-manuals/installing-adrotate-on-your-website/" target="_blank">'.__('Installation instructions', 'adrotate-pro').'</a>.';
 	}
 
@@ -684,7 +684,7 @@ function adrotate_notifications_dashboard() {
 			if($getpro_banner < adrotate_now()) {
 				echo '<div class="ajdg-notification notice" style="">';
 				echo '	<div class="ajdg-notification-logo" style="background-image: url(\''.plugins_url('/images/notification.png', __FILE__).'\');"><span></span></div>';
-				echo '	<div class="ajdg-notification-message">Hello <strong>'.$displayname.'</strong>. Have you considered upgrading to <strong>AdRotate Professional</strong> yet?<br />Get extra features like Geo Targeting, Scheduling, mobile adverts, access to premium support and much more for only &euro;39 EUR.<br />Use coupon code <strong>getadrotatepro</strong> and get a 10% discount on any <strong>AdRotate Professional</strong> license! Thank you for your support!</div>';
+				echo '	<div class="ajdg-notification-message">Hello <strong>'.$displayname.'</strong>. Have you considered upgrading to <strong>AdRotate Professional</strong> yet?<br />Get extra features like Geo Targeting, Scheduling, mobile adverts, access to premium support and much more starting at only &euro;39 EUR.<br />Use coupon code <strong>getadrotatepro</strong> and get a 10% discount on any <strong>AdRotate Professional</strong> license! Thank you for your consideration!</div>';
 				echo '	<div class="ajdg-notification-cta">';
 				echo '		<a href="'.admin_url('admin.php?page=adrotate-pro').'" class="ajdg-notification-act button-primary">Get AdRotate Pro</a>';
 				echo '		<a href="admin.php?page=adrotate&hide=0" class="ajdg-notification-dismiss">Maybe later</a>';
@@ -740,7 +740,7 @@ function adrotate_notifications_dashboard() {
 	if($adrotate_db_version['current'] < ADROTATE_DB_VERSION OR $adrotate_version['current'] < ADROTATE_VERSION) {
 		echo '<div class="ajdg-notification notice" style="">';
 		echo '	<div class="ajdg-notification-logo" style="background-image: url(\''.plugins_url('/images/notification.png', __FILE__).'\');"><span></span></div>';
-		echo '	<div class="ajdg-notification-message">Thanks for updating <strong>'.$displayname.'</strong>! You have almost completed updating <strong>AdRotate</strong> to version <strong>'.ADROTATE_DISPLAY.'</strong>!<br />To complete the update <strong>click the button on the right</strong>. This may take a few seconds to complete!<br />For an overview of what has changed take a look at the <a href="https://ajdg.solutions/support/adrotate-development/?pk_campaign=adrotatepro&pk_keyword=finish_update_notification" target="_blank">development page</a> and usually there is an article on <a href="https://ajdg.solutions/blog/" target="_blank">the blog</a> with more information as well.</div>';
+		echo '	<div class="ajdg-notification-message">Thanks for updating <strong>'.$displayname.'</strong>! You have almost completed updating <strong>AdRotate</strong> to version <strong>'.ADROTATE_DISPLAY.'</strong>!<br />To complete the update <strong>click the button on the right</strong>. This may take a few seconds to complete!<br />For an overview of what has changed take a look at the <a href="https://ajdg.solutions/support/adrotate-development/?pk_campaign=adrotatefree&pk_keyword=finish_update_notification" target="_blank">development page</a> and usually there is an article on <a href="https://ajdg.solutions/blog/" target="_blank">the blog</a> with more information as well.</div>';
 		echo '	<div class="ajdg-notification-cta">';
 		echo '		<a href="admin.php?page=adrotate-settings&tab=maintenance&action=update-db" class="ajdg-notification-act button-primary update-button">Finish update</a>';
 		echo '	</div>';
@@ -802,7 +802,7 @@ function adrotate_help_info() {
         'content' => '<h4>Get help using AdRotate</h4>'.
         '<p>Everyone needs some help sometimes. AdRotate has many guides and manuals as well as a Support Forum on the AdRotate website to get you going.<br />All the relevant links to getting help and the Professional Services I offer can be found on the <a href="'.admin_url('admin.php?page=adrotate-support').'">Support dashboard</a>.</p>'.
 
-        '<p>Take a look at the <a href="https://ajdg.solutions/support/adrotate-manuals/?pk_campaign=adrotatefree&pk_keyword=helptab" target="_blank">AdRotate Manuals</a> and the <a href="https://ajdg.solutions/forums/forum/adrotate-for-wordpress/?pk_campaign=adrotatefree&pk_keyword=helptab" target="_blank">Support Forum</a> here. Also check out  <a href="https://ajdg.solutions/recommended-products/?pk_campaign=adrotatepro&pk_keyword=helptab" target="_blank">recommended products and services</a> I use.</p>'
+        '<p>Take a look at the <a href="https://ajdg.solutions/support/adrotate-manuals/?pk_campaign=adrotatefree&pk_keyword=helptab" target="_blank">AdRotate Manuals</a> and the <a href="https://ajdg.solutions/forums/forum/adrotate-for-wordpress/?pk_campaign=adrotatefree&pk_keyword=helptab" target="_blank">Support Forum</a> here. Also check out  <a href="https://ajdg.solutions/recommended-products/?pk_campaign=adrotatefree&pk_keyword=helptab" target="_blank">recommended products and services</a> I use.</p>'
 		)
     );
 }

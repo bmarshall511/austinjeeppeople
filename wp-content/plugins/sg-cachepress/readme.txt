@@ -82,7 +82,7 @@ You can exclude script from being minified using the filter we’ve designed for
 
 You can exclude script from being combined using the filter we’ve designed for that purpose. Here’s an example of the code, you can add to your functions.php file:
 
-	add_filter( 'siteground_optimizer_combine_javascript_exclude', 'js_combine_exclude' );
+	add_filter( 'sgo_javascript_combine_exclude', 'js_combine_exclude' );
 	function js_combine_exclude( $exclude_list ) {
 		$exclude_list[] = 'script-handle';
 		$exclude_list[] = 'script-handle-2';
@@ -203,6 +203,15 @@ Our plugin uses a cookie in order to function properly. It does not store person
 1. Go to Plugins -> Installed Plugins and click the 'Activate' link under the WordPress SG Optimizer listing
 
 == Changelog ==
+
+= Version 5.5.5 =
+* Improved Script Combinations Excluding Functionality
+* Improved Internationalisation
+* Improved Lazy Loading
+* Improved WooCommerce Support for 3rd Party Payment Gateways
+* Added Global JS exclude for Plugins with Known Issues
+* Added WP-Authorized-Net support
+* Added Facebook for WooCommerce support
 
 = Version 5.5.4 =
 * Fixed issue with CSS Combination causing problems with media specific stylesheets

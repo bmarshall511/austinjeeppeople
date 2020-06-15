@@ -1,3 +1,4 @@
+var ecsExecTime = new Date().getTime();
 var EleCustomSkinPreview = elementorModules.frontend.handlers.Base.extend({
   
   loadedTemplates:{
@@ -79,18 +80,23 @@ var EleCustomSkinPreview = elementorModules.frontend.handlers.Base.extend({
     this.previewArguments.columns = columns;
   },
   onElementChange: function onElementChange() {
-    this.run();
+    var self = this;
+    setTimeout(function(){
+      self.run();
+    }, 2000); 
   },
   getOriginal: function getOriginal(){
     this.originalContent=jQuery('.page-content .elementor-section-wrap').html();
   },
   run: function run(){
-    this.destroyContent();
-    this.checkArguments();
-    this.getOriginal();
-    this.generateContent();
-    this.writePreview();
-    //console.log(this.previewContent+" sunt aici");
+    if(ecsRunEvery(2000)){
+        this.destroyContent();
+        this.checkArguments();
+        this.getOriginal();
+        this.generateContent();
+        this.writePreview();
+      //console.log(this.previewContent+" sunt aici");
+    }
   }
   
 });
@@ -106,3 +112,10 @@ jQuery(window).on('elementor/frontend/init', () => {
   elementorFrontend.hooks.addAction('frontend/element_ready/global', addHandler);
 
 });
+
+function ecsRunEvery( miliseconds ){
+  if(new Date().getTime() < ecsExecTime + miliseconds) return false;
+  ecsExecTime = new Date().getTime();
+  return true;
+  
+}

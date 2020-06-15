@@ -9,6 +9,7 @@ use SiteGround_Optimizer\Htaccess\Htaccess;
 use SiteGround_Optimizer\Helper\Helper;
 use SiteGround_Optimizer\Multisite\Multisite;
 use SiteGround_Optimizer\Modules\Modules;
+use SiteGround_Optimizer\I18n\I18n;
 
 /**
  * Handle all hooks for our custom admin page.
@@ -45,7 +46,6 @@ class Admin {
 			add_action( 'wp_ajax_dismiss_blocking_plugins_notice', array( $this, 'hide_blocking_plugins_notice' ) );
 			add_action( 'wp_ajax_dismiss_cache_plugins_notice', array( $this, 'hide_cache_plugins_notice' ) );
 		}
-
 	}
 
 	/**
@@ -151,7 +151,7 @@ class Admin {
 			'is_avalon'          => Helper::is_avalon(),
 			'modules'            => $this->modules->get_active_modules(),
 			'tabs'               => $this->modules->get_active_tabs(),
-			'locale'             => Helper::get_i18n_data_json(),
+			'locale'             => I18n::get_i18n_data_json(),
 			'update_timestamp'   => get_option( 'siteground_optimizer_update_timestamp', 0 ),
 			'cards'              => $this->modules->get_slider_modules(),
 			'is_shop'            => is_plugin_active( 'woocommerce/woocommerce.php' ) ? 1 : 0,
@@ -262,8 +262,7 @@ class Admin {
 	 * @since  5.0.0
 	 */
 	public function render() {
-		// Include the partial.
-		include \SiteGround_Optimizer\DIR . '/partials/admin-page.php';
+		echo '<div id="sg-optimizer-app"></div>';
 	}
 
 

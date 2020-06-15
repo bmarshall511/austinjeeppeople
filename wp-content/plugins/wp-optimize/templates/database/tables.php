@@ -57,4 +57,3 @@ do_action('wpo_tables_list_before');
 <?php
 
 WP_Optimize()->include_template('database/tables-list-after.php', false, array('optimize_db' => $optimize_db, 'load_data' => $load_data));
-

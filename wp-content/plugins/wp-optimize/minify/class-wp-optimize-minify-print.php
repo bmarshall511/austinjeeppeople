@@ -1,6 +1,10 @@
 <?php
 if (!defined('ABSPATH')) die('No direct access allowed');
 
+if (!class_exists('WP_Optimize_Minify_Functions')) {
+	include WP_OPTIMIZE_MINIFY_DIR.'/class-wp-optimize-minify-functions.php';
+}
+
 class WP_Optimize_Minify_Print {
 
 	/**

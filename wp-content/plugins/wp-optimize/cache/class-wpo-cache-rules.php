@@ -101,8 +101,9 @@ class WPO_Cache_Rules {
 	 */
 	public function purge_post_on_update($post_id) {
 		$post_type = get_post_type($post_id);
+		$post_type_object = get_post_type_object($post_type);
 
-		if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) || 'revision' === $post_type) {
+		if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) || 'revision' === $post_type || !$post_type_object->public) {
 			return;
 		}
 
@@ -209,9 +210,24 @@ class WPO_Cache_Rules {
 
 		$post_type = get_post_type($object_id);
 
-		if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) || 'revision' === $post_type) {
+		if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) || 'revision' === $post_type || 'product_type' === $taxonomy || 'action-group' === $taxonomy) {
 			return;
 		}
+
+		/**
+		 * Adds a way to exit the purge of terms permalink using the provided parameters.
+		 *
+		 * @param bool   $purge      The value filtered, whether or not to purge the related elements
+		 * @param int    $object_id  Object ID.
+		 * @param array  $terms      An array of object terms.
+		 * @param array  $tt_ids     An array of term taxonomy IDs.
+		 * @param string $taxonomy   Taxonomy slug.
+		 * @param bool   $append     Whether to append new terms to the old terms.
+		 * @param array  $old_tt_ids Old array of term taxonomy IDs.
+		 * @default true
+		 * @return boolean
+		 */
+		if (!apply_filters('wpo_cache_purge_related_elements_on_post_terms_change', true, $object_id, $terms, $tt_ids, $taxonomy, $append, $old_tt_ids)) return;
 
 		// get all affected terms.
 		$affected_terms_ids = array_unique(array_merge($tt_ids, $old_tt_ids));
@@ -224,6 +240,9 @@ class WPO_Cache_Rules {
 
 				$term_permalink = get_term_link($term['term_id']);
 				if (!is_wp_error($term_permalink)) {
+					$url = parse_url($term_permalink);
+					// Check if the permalink contains a valid path, to avoid deleting the whole cache.
+					if (!isset($url['path']) || '/' === $url['path']) return;
 					WPO_Page_Cache::delete_cache_by_url($term_permalink, true);
 				}
 			}

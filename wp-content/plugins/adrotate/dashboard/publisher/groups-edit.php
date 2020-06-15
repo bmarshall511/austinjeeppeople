@@ -34,6 +34,18 @@ if($edit_group) {
 		$meta_array[] = $meta->ad;
 	}
 	if(!is_array($meta_array)) $meta_array = array();
+
+	if($group_edit_id AND $edit_group->name != '') {
+		// Errors
+		if($edit_group->modus == 2 AND $edit_group->gridrows == 1 AND $edit_group->gridcolumns == 1) 
+			echo '<div class="error"><p>'. __('Your block is a 1x1 grid. Either add more rows or columns or set the group to Default mode.', 'adrotate-pro').'</p></div>';
+
+		if($edit_group->cat_loc > 0 AND strlen($edit_group->cat) == 0) 
+			echo '<div class="error"><p>'. __('You have enabled Post Injection but did not select any categories.', 'adrotate-pro').'</p></div>';
+
+		if($edit_group->page_loc > 0 AND strlen($edit_group->page) == 0) 
+			echo '<div class="error"><p>'. __('You have enabled Page Injection but did not select any pages.', 'adrotate-pro').'</p></div>';
+	}	
 	?>
 	
 	<form name="editgroup" id="post" method="post" action="admin.php?page=adrotate-groups">

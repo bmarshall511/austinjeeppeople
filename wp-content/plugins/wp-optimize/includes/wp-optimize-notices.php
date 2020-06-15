@@ -2,7 +2,7 @@
 
 if (!defined('WPO_PLUGIN_MAIN_PATH')) die('No direct access allowed');
 
-if (!class_exists('Updraft_Notices_1_0')) require_once(WPO_PLUGIN_MAIN_PATH.'/includes/updraft-notices.php');
+if (!class_exists('Updraft_Notices_1_0')) require_once(WPO_PLUGIN_MAIN_PATH.'includes/updraft-notices.php');
 
 class WP_Optimize_Notices extends Updraft_Notices_1_0 {
 
@@ -144,9 +144,9 @@ class WP_Optimize_Notices extends Updraft_Notices_1_0 {
 				'button_link' => 'https://getwpo.com',
 				'button_meta' => 'wp-optimize',
 				'dismiss_time' => 'dismiss_season',
-				'discount_code' => 'blackfridaysale2019',
-				'valid_from' => '2019-11-20 00:00:00',
-				'valid_to' => '2019-11-30 23:59:59',
+				'discount_code' => 'blackfridaysale2020',
+				'valid_from' => '2020-11-20 00:00:00',
+				'valid_to' => '2020-11-30 23:59:59',
 				'supported_positions' => $this->dashboard_top_or_report,
 				'validity_function' => 'is_wpo_premium_installed',
 			),
@@ -158,9 +158,9 @@ class WP_Optimize_Notices extends Updraft_Notices_1_0 {
 				'button_link' => 'https://getwpo.com',
 				'button_meta' => 'wp-optimize',
 				'dismiss_time' => 'dismiss_season',
-				'discount_code' => 'christmassale2019',
-				'valid_from' => '2019-12-01 00:00:00',
-				'valid_to' => '2019-12-25 23:59:59',
+				'discount_code' => 'christmassale2020',
+				'valid_from' => '2020-12-01 00:00:00',
+				'valid_to' => '2020-12-25 23:59:59',
 				'supported_positions' => $this->dashboard_top_or_report,
 				'validity_function' => 'is_wpo_premium_installed',
 			),
@@ -172,23 +172,23 @@ class WP_Optimize_Notices extends Updraft_Notices_1_0 {
 				'button_link' => 'https://getwpo.com',
 				'button_meta' => 'wp-optimize',
 				'dismiss_time' => 'dismiss_season',
-				'discount_code' => 'newyearsale2020',
-				'valid_from' => '2019-12-26 00:00:00',
-				'valid_to' => '2020-01-14 23:59:59',
+				'discount_code' => 'newyearsale2021',
+				'valid_from' => '2020-12-26 00:00:00',
+				'valid_to' => '2021-01-14 23:59:59',
 				'supported_positions' => $this->dashboard_top_or_report,
 				'validity_function' => 'is_wpo_premium_installed',
 			),
 			'spring' => array(
 				'prefix' => '',
-				'title' => __('Spring sale - 20% off WP-Optimize Premium until April 30th', 'wp-optimize'),
+				'title' => __('Spring sale - 20% off WP-Optimize Premium until May 15th', 'wp-optimize'),
 				'text' => __('To benefit, use this discount code:', 'wp-optimize').' ',
 				'image' => 'notices/spring.png',
 				'button_link' => 'https://getwpo.com',
 				'button_meta' => 'wp-optimize',
 				'dismiss_time' => 'dismiss_season',
-				'discount_code' => 'springsale2019',
-				'valid_from' => '2019-04-01 00:00:00',
-				'valid_to' => '2019-04-30 23:59:59',
+				'discount_code' => 'springsale2020',
+				'valid_from' => '2020-04-01 00:00:00',
+				'valid_to' => '2020-05-15 23:59:59',
 				'supported_positions' => $this->dashboard_top_or_report,
 				'validity_function' => 'is_wpo_premium_installed',
 			),
@@ -200,9 +200,9 @@ class WP_Optimize_Notices extends Updraft_Notices_1_0 {
 				'button_link' => 'https://getwpo.com',
 				'button_meta' => 'wp-optimize',
 				'dismiss_time' => 'dismiss_season',
-				'discount_code' => 'summersale2019',
-				'valid_from' => '2019-07-01 00:00:00',
-				'valid_to' => '2019-07-31 23:59:59',
+				'discount_code' => 'summersale2020',
+				'valid_from' => '2020-07-01 00:00:00',
+				'valid_to' => '2020-07-31 23:59:59',
 				'supported_positions' => $this->dashboard_top_or_report,
 				'validity_function' => 'is_wpo_premium_installed',
 			)

@@ -1,29 +1,6 @@
 <?php if (!defined('WPO_VERSION'))  die('No direct access allowed'); ?>
-<div class="wpo_section wpo_group<?php echo (!$wpo_minify_options['enable_js']) ? ' wpo-feature-is-disabled' : ''; ?>">
+<div class="wpo_section wpo_group">
 	<div id="wpo_settings_warnings"></div>
-		
-	<div class="wpo-fieldgroup wpo-show">
-		<div class="wpo-fieldgroup__subgroup wpo_min_enable_minify">
-			<div class="switch-container">
-				<label class="switch">
-					<input
-						name="enable_js"
-						id="wpo_min_enable_minify_js"
-						class="wpo-save-setting"
-						type="checkbox"
-						value="true"
-						<?php checked($wpo_minify_options['enable_js']);?>
-					>
-					<span class="slider round"></span>
-				</label>
-				<label for="wpo_min_enable_minify_js">
-					<?php _e('Enable Minify for JavaScript files', 'wp-optimize'); ?>
-					<span tabindex="0" data-tooltip="<?php esc_attr_e('The JavaScript files will be combined and minified to lower the number and size of requests.', 'wp-optimize');?>"><span class="dashicons dashicons-editor-help"></span> </span>
-				</label>
-			</div>
-		</div>
-	</div>
-
 	<form>
 		<h3><?php _e('JavaScript options', 'wp-optimize'); ?></h3>
 		<div class="wpo-fieldgroup">
@@ -37,7 +14,29 @@
 						<?php echo checked($wpo_minify_options['enable_js_minification']); ?>
 					>
 					<?php _e('Enable minification of JavaScript files', 'wp-optimize'); ?>
-					<span tabindex="0" data-tooltip="<?php esc_attr_e('If disabled, the JavaScript files will be merged but not minified', 'wp-optimize');?>"><span class="dashicons dashicons-editor-help"></span> </span>
+				</label>
+				<label for="enable_merging_of_js">
+					<input
+						name="enable_merging_of_js"
+						type="checkbox"
+						id="enable_merging_of_js"
+						value="1"
+						<?php echo checked($wpo_minify_options['enable_merging_of_js']); ?>
+					>
+					<?php _e('Enable merging of JavaScript files', 'wp-optimize'); ?>
+					<span tabindex="0" data-tooltip="<?php _e('If some functionality is breaking on the frontend, disabling merging of JavaScript might fix the issues.', 'wp-optimize');?>"><span class="dashicons dashicons-editor-help"></span> </span>
+				</label>
+				<label for="enable_js_trycatch">
+					<input
+						name="enable_js_trycatch"
+						type="checkbox"
+						id="enable_js_trycatch"
+						value="1"
+						<?php echo checked($wpo_minify_options['enable_js_trycatch']); ?>
+					>
+					<?php _e('Contain each included file in its own block', 'wp-optimize'); ?>
+					<em><?php _e('(enable if trying to isolate a JavaScript error introduced by minifying or merging)', 'wp-optimize'); ?></em>
+					<span tabindex="0" data-tooltip="<?php esc_attr_e('When enabled, the content of each JavaScript file that is combined will be wrapped in its own "try / catch" statement. This means that if one file has an error, it should not impede execution of other, independent files.', 'wp-optimize'); ?>"><span class="dashicons dashicons-editor-help"></span> </span>
 				</label>
 			</fieldset>
 		</div>

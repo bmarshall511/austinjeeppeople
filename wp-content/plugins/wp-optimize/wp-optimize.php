@@ -3,7 +3,7 @@
 Plugin Name: WP-Optimize - Clean, Compress, Cache
 Plugin URI: https://getwpo.com
 Description: WP-Optimize makes your site fast and efficient. It cleans the database, compresses images and caches pages. Fast sites attract more traffic and users.
-Version: 3.0.19
+Version: 3.1.2
 Author: David Anderson, Ruhani Rabin, Team Updraft
 Author URI: https://updraftplus.com
 Text Domain: wp-optimize
@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) die('No direct access allowed');
 
 // Check to make sure if WP_Optimize is already call and returns.
 if (!class_exists('WP_Optimize')) :
-define('WPO_VERSION', '3.0.19');
+define('WPO_VERSION', '3.1.2');
 define('WPO_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('WPO_PLUGIN_MAIN_PATH', plugin_dir_path(__FILE__));
 define('WPO_PREMIUM_NOTIFICATION', false);
@@ -85,13 +85,15 @@ class WP_Optimize {
 		 */
 		add_action('wp_optimize_admin_page_wpo_images_smush', array($this, 'admin_page_wpo_images_smush'));
 
-		include_once(WPO_PLUGIN_MAIN_PATH.'/includes/updraftcentral.php');
+		include_once(WPO_PLUGIN_MAIN_PATH.'includes/updraftcentral.php');
 
-		include_once(WPO_PLUGIN_MAIN_PATH.'/includes/backward-compatibility-functions.php');
+		include_once(WPO_PLUGIN_MAIN_PATH.'includes/backward-compatibility-functions.php');
 		
 		register_shutdown_function(array($this, 'log_fatal_errors'));
 
 		$this->schedule_plugin_cron_tasks();
+
+		add_action('wpo_admin_before_closing_wrap', array($this, 'load_modal_template'), 20);
 	}
 	
 	public function admin_page_wpo_images_smush() {
@@ -109,7 +111,7 @@ class WP_Optimize {
 
 	public static function get_optimizer() {
 		if (empty(self::$_optimizer_instance)) {
-			if (!class_exists('WP_Optimizer')) include_once(WPO_PLUGIN_MAIN_PATH.'/includes/class-wp-optimizer.php');
+			if (!class_exists('WP_Optimizer')) include_once(WPO_PLUGIN_MAIN_PATH.'includes/class-wp-optimizer.php');
 			self::$_optimizer_instance = new WP_Optimizer();
 		}
 		return self::$_optimizer_instance;
@@ -123,7 +125,7 @@ class WP_Optimize {
 	public function get_minify() {
 		if (empty(self::$_minify_instance)) {
 				if (!class_exists('WP_Optimize_Minify')) {
-					include_once WPO_PLUGIN_MAIN_PATH.'/minify/class-wp-optimize-minify.php';
+					include_once WPO_PLUGIN_MAIN_PATH.'minify/class-wp-optimize-minify.php';
 				}
 				self::$_minify_instance = new WP_Optimize_Minify();
 		}
@@ -132,7 +134,7 @@ class WP_Optimize {
 
 	public static function get_options() {
 		if (empty(self::$_options_instance)) {
-			if (!class_exists('WP_Optimize_Options')) include_once(WPO_PLUGIN_MAIN_PATH.'/includes/class-wp-optimize-options.php');
+			if (!class_exists('WP_Optimize_Options')) include_once(WPO_PLUGIN_MAIN_PATH.'includes/class-wp-optimize-options.php');
 			self::$_options_instance = new WP_Optimize_Options();
 		}
 		return self::$_options_instance;
@@ -140,7 +142,7 @@ class WP_Optimize {
 
 	public static function get_notices() {
 		if (empty(self::$_notices_instance)) {
-			if (!class_exists('WP_Optimize_Notices')) include_once(WPO_PLUGIN_MAIN_PATH.'/includes/wp-optimize-notices.php');
+			if (!class_exists('WP_Optimize_Notices')) include_once(WPO_PLUGIN_MAIN_PATH.'includes/wp-optimize-notices.php');
 			self::$_notices_instance = new WP_Optimize_Notices();
 		}
 		return self::$_notices_instance;
@@ -152,7 +154,7 @@ class WP_Optimize {
 	 * @return WPO_Page_Cache
 	 */
 	public function get_page_cache() {
-		if (!class_exists('WPO_Page_Cache')) include_once(WPO_PLUGIN_MAIN_PATH.'/cache/class-wpo-page-cache.php');
+		if (!class_exists('WPO_Page_Cache')) include_once(WPO_PLUGIN_MAIN_PATH.'cache/class-wpo-page-cache.php');
 
 		return WPO_Page_Cache::instance();
 	}
@@ -164,7 +166,7 @@ class WP_Optimize {
 	 */
 	public static function get_browser_cache() {
 		if (empty(self::$_browser_cache)) {
-			if (!class_exists('WP_Optimize_Browser_Cache')) include_once(WPO_PLUGIN_MAIN_PATH.'/includes/class-wp-optimize-browser-cache.php');
+			if (!class_exists('WP_Optimize_Browser_Cache')) include_once(WPO_PLUGIN_MAIN_PATH.'includes/class-wp-optimize-browser-cache.php');
 			self::$_browser_cache = new WP_Optimize_Browser_Cache();
 		}
 		return self::$_browser_cache;
@@ -177,7 +179,7 @@ class WP_Optimize {
 	 */
 	public function get_db_info() {
 		if (empty(self::$_db_info)) {
-			if (!class_exists('WP_Optimize_Database_Information')) include_once(WPO_PLUGIN_MAIN_PATH.'/includes/wp-optimize-database-information.php');
+			if (!class_exists('WP_Optimize_Database_Information')) include_once(WPO_PLUGIN_MAIN_PATH.'includes/wp-optimize-database-information.php');
 			self::$_db_info = new WP_Optimize_Database_Information();
 		}
 		return self::$_db_info;
@@ -190,7 +192,7 @@ class WP_Optimize {
 	 */
 	static public function get_gzip_compression() {
 		if (empty(self::$_gzip_compression)) {
-			if (!class_exists('WP_Optimize_Gzip_Compression')) include_once(WPO_PLUGIN_MAIN_PATH.'/includes/class-wp-optimize-gzip-compression.php');
+			if (!class_exists('WP_Optimize_Gzip_Compression')) include_once(WPO_PLUGIN_MAIN_PATH.'includes/class-wp-optimize-gzip-compression.php');
 			self::$_gzip_compression = new WP_Optimize_Gzip_Compression();
 		}
 		return self::$_gzip_compression;
@@ -217,18 +219,27 @@ class WP_Optimize {
 	 */
 	public static function get_logger() {
 		if (empty(self::$_logger_instance)) {
-			include_once(WPO_PLUGIN_MAIN_PATH.'/includes/class-updraft-logger.php');
+			include_once(WPO_PLUGIN_MAIN_PATH.'includes/class-updraft-logger.php');
 			self::$_logger_instance = new Updraft_Logger();
 		}
 		return self::$_logger_instance;
 	}
 
 	/**
+	 * Check if the current page belongs to WP-Optimize.
+	 *
+	 * @return bool
+	 */
+	public function is_wpo_page() {
+		$current_screen = get_current_screen();
+
+		return (bool) preg_match('/wp\-optimize/i', $current_screen->id);
+	}
+
+	/**
 	 * Enqueue scripts and styles on WP-Optimize pages.
 	 */
 	public function admin_enqueue_scripts() {
-		$current_screen = get_current_screen();
-
 		$enqueue_version = (defined('WP_DEBUG') && WP_DEBUG) ? WPO_VERSION.'.'.time() : WPO_VERSION;
 		$min_or_not = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? '' : '.min';
 		$min_or_not_internal = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? '' : '-'. str_replace('.', '-', WPO_VERSION). '.min';
@@ -237,13 +248,14 @@ class WP_Optimize {
 		wp_register_script('wp-optimize-send-command', WPO_PLUGIN_URL.'js/send-command'.$min_or_not_internal.'.js', array(), $enqueue_version);
 
 		// load scripts and styles only on WP-Optimize pages.
-		if (!preg_match('/wp\-optimize/i', $current_screen->id)) return;
+		if (!$this->is_wpo_page()) return;
 		
 		wp_enqueue_script('jquery-serialize-json', WPO_PLUGIN_URL.'js/serialize-json/jquery.serializejson'.$min_or_not.'.js', array('jquery'), $enqueue_version);
 
 		wp_register_script('updraft-queue-js', WPO_PLUGIN_URL.'js/queue'.$min_or_not_internal.'.js', array(), $enqueue_version);
+		wp_enqueue_script('wp-optimize-modal', WPO_PLUGIN_URL.'js/modal'.$min_or_not_internal.'.js', array('jquery', 'backbone', 'wp-util'), $enqueue_version);
 		wp_enqueue_script('wp-optimize-cache-js', WPO_PLUGIN_URL.'js/cache'.$min_or_not_internal.'.js', array('wp-optimize-send-command', 'smush-js'), $enqueue_version);
-		wp_enqueue_script('wp-optimize-admin-js', WPO_PLUGIN_URL.'js/wpoadmin'.$min_or_not_internal.'.js', array('jquery', 'updraft-queue-js', 'wp-optimize-send-command', 'smush-js'), $enqueue_version);
+		wp_enqueue_script('wp-optimize-admin-js', WPO_PLUGIN_URL.'js/wpoadmin'.$min_or_not_internal.'.js', array('jquery', 'updraft-queue-js', 'wp-optimize-send-command', 'smush-js', 'wp-optimize-modal'), $enqueue_version);
 		wp_enqueue_style('wp-optimize-admin-css', WPO_PLUGIN_URL.'css/wp-optimize-admin'.$min_or_not_internal.'.css', array(), $enqueue_version);
 		// Using tablesorter to help with organising the DB size on Table Information
 		// https://github.com/Mottie/tablesorter
@@ -258,14 +270,14 @@ class WP_Optimize {
 
 		wp_localize_script('wp-optimize-admin-js', 'wpoptimize', $js_variables);
 
-		do_action('wpo_premium_scripts_styles', $min_or_not, $enqueue_version);
+		do_action('wpo_premium_scripts_styles', $min_or_not_internal, $min_or_not, $enqueue_version);
 	}
 
 	/**
 	 * Load Task Manager
 	 */
 	public function get_task_manager() {
-		include_once(WPO_PLUGIN_MAIN_PATH.'/vendor/team-updraft/common-libs/src/updraft-tasks/class-updraft-tasks-activation.php');
+		include_once(WPO_PLUGIN_MAIN_PATH.'vendor/team-updraft/common-libs/src/updraft-tasks/class-updraft-tasks-activation.php');
 
 		Updraft_Tasks_Activation::check_updates();
 
@@ -285,7 +297,7 @@ class WP_Optimize {
 	 * @returns Boolean
 	 */
 	public static function is_premium() {
-		if (file_exists(WPO_PLUGIN_MAIN_PATH.'/premium.php') && function_exists('WP_Optimize_Premium')) {
+		if (file_exists(WPO_PLUGIN_MAIN_PATH.'premium.php') && function_exists('WP_Optimize_Premium')) {
 			$wp_optimize_premium = WP_Optimize_Premium();
 			if (is_a($wp_optimize_premium, 'WP_Optimize_Premium')) return true;
 		}
@@ -350,8 +362,8 @@ class WP_Optimize {
 		}
 
 		// Run Premium loader if it exists
-		if (file_exists(WPO_PLUGIN_MAIN_PATH.'/premium.php') && !class_exists('WP_Optimize_Premium')) {
-			include_once(WPO_PLUGIN_MAIN_PATH.'/premium.php');
+		if (file_exists(WPO_PLUGIN_MAIN_PATH.'premium.php') && !class_exists('WP_Optimize_Premium')) {
+			include_once(WPO_PLUGIN_MAIN_PATH.'premium.php');
 		}
 
 		// load defaults
@@ -389,7 +401,7 @@ class WP_Optimize {
 		$this->init_page_cache();
 
 		// Include minify
-		// $this->get_minify();
+		$this->get_minify();
 		$this->run_updates();
 	}
 
@@ -576,13 +588,19 @@ class WP_Optimize {
 		} else {
 			// Other commands, available for any remote method.
 			if (!class_exists('WP_Optimize_Commands')) include_once(WPO_PLUGIN_MAIN_PATH . 'includes/class-commands.php');
-			if (!class_exists('WP_Optimize_Cache_Commands')) include_once(WPO_PLUGIN_MAIN_PATH . 'cache/class-cache-commands.php');
 			if (!class_exists('WP_Optimize_Minify_Commands')) include_once(WPO_PLUGIN_MAIN_PATH . 'minify/class-wp-optimize-minify-commands.php');
+			if (!class_exists('WP_Optimize_Cache_Commands')) include_once(WPO_PLUGIN_MAIN_PATH . 'cache/class-cache-commands.php');
 
 			$commands = new WP_Optimize_Commands();
-			$cache_commands = new WP_Optimize_Cache_Commands();
 			$minify_commands = new WP_Optimize_Minify_Commands();
 
+
+			if (self::is_premium()) {
+				if (!class_exists('WP_Optimize_Cache_Commands_Premium')) include_once(WPO_PLUGIN_MAIN_PATH . 'cache/class-cache-commands-premium.php');
+				$cache_commands = new WP_Optimize_Cache_Commands_Premium();
+			} else {
+				$cache_commands = new WP_Optimize_Cache_Commands();
+			}
 
 			// check if called command not in main commands class and exist in cache commands class then change class.
 			if (!is_callable(array($commands, $subaction)) && is_callable(array($minify_commands, $subaction))) {
@@ -664,8 +682,8 @@ class WP_Optimize {
 			),
 			'wpo_images'  => array(
 				'smush' => __('Compress images', 'wp-optimize'),
-				'unused' => __('Unused images and sizes', 'wp-optimize').'<span class="premium-only">Premium</span>',
-				'lazyload' => __('Lazy-load', 'wp-optimize').'<span class="premium-only">Premium</span>',
+				'unused' => __('Unused images and sizes', 'wp-optimize').'<span class="menu-pill premium-only">Premium</span>',
+				'lazyload' => __('Lazy-load', 'wp-optimize').'<span class="menu-pill premium-only">Premium</span>',
 			),
 			'wpo_cache' => array(
 				'cache' => __('Page cache', 'wp-optimize'),
@@ -673,6 +691,14 @@ class WP_Optimize {
 				'advanced' => __('Advanced settings', 'wp-optimize'),
 				'gzip' => __('Gzip compression', 'wp-optimize'),
 				'settings' => __('Static file headers', 'wp-optimize')  // Adds a settings tab
+			),
+			'wpo_minify' => array(
+				"status" => __('Minify status', 'wp-optimize'),
+				"js" => __('JavaScript', 'wp-optimize').'<span class="menu-pill disabled hidden">'.__('Disabled', 'wp-optimize').'</span>',
+				"css" => __('CSS', 'wp-optimize').'<span class="menu-pill disabled hidden">'.__('Disabled', 'wp-optimize').'</span>',
+				"font" => __('Fonts', 'wp-optimize'),
+				"settings" => __('Settings', 'wp-optimize'),
+				"advanced" => __('Advanced', 'wp-optimize')
 			),
 			'wpo_settings' => array(
 				'settings' => array(
@@ -716,6 +742,8 @@ class WP_Optimize {
 				$this->display_admin_page($page['menu_slug']);
 			}
 		}
+
+		do_action('wpo_admin_before_closing_wrap');
 
 		// closes main plugin wrapper div. #wp-optimize-wrap
 		echo '</div><!-- END #wp-optimize-wrap -->';
@@ -890,7 +918,7 @@ class WP_Optimize {
 	public function output_page_cache_tab() {
 		$wpo_cache = $this->get_page_cache();
 		$wpo_cache_options = $wpo_cache->config->get();
-		$display = $wpo_cache_options['enable_page_caching'] ? "style='display:block'" : "style='display:none'";
+		$display = $wpo_cache->is_enabled() ? "style='display:block'" : "style='display:none'";
 
 		WP_Optimize()->include_template('cache/page-cache.php', false, array(
 			'wpo_cache' => $wpo_cache,
@@ -1055,7 +1083,6 @@ class WP_Optimize {
 			'are_you_sure_you_want_to_remove_logging_destination' => __('Are you sure you want to remove this logging destination?', 'wp-optimize'),
 			'fill_all_settings_fields' => __('Before saving, you need to complete the currently incomplete settings (or remove them).', 'wp-optimize'),
 			'table_was_not_repaired' => __('%s was not repaired. For more details, please check the logs (configured in your logging destinations settings).', 'wp-optimize'),
-			'are_you_sure_you_want_to_remove_this_table' => __('WARNING - some plugins might not be detected as installed or activated if they are in unknown folders (for example premium plugins).', 'wp-optimize').' '.__('Only delete a table if you are sure of what you are doing, and after taking a backup.', 'wp-optimize')." \r".__('Are you sure you want to remove this table?', 'wp-optimize'),
 			'table_was_not_deleted' => __('%s was not deleted. For more details, please check your logs configured in logging destinations settings.', 'wp-optimize'),
 			'please_use_positive_integers' => __('Please use positive integers.', 'wp-optimize'),
 			'please_use_valid_values' => __('Please use valid values.', 'wp-optimize'),
@@ -1067,7 +1094,9 @@ class WP_Optimize {
 			'number_of_files' => __('Number of files:', 'wp-optimize'),
 			'toggle_info' => __('Show information', 'wp-optimize'),
 			'page_refresh' => __('Refreshing the page to reflect changes...', 'wp-optimize'),
+			'settings_have_been_deleted_successfully' => __('WP-Optimize settings have been deleted successfully.', 'wp-optimize'),
 			'spinner_src' => esc_attr(admin_url('images/spinner-2x.gif')),
+			'settings_page_url' => admin_url('admin.php?page=wpo_settings'),
 			'sites' => $this->get_sites(),
 		));
 	}
@@ -1282,7 +1311,7 @@ class WP_Optimize {
 	 * Run updates on plugin activation.
 	 */
 	public function run_updates() {
-		include_once(WPO_PLUGIN_MAIN_PATH.'/includes/class-wp-optimize-updates.php');
+		include_once(WPO_PLUGIN_MAIN_PATH.'includes/class-wp-optimize-updates.php');
 		WP_Optimize_Updates::check_updates();
 	}
 
@@ -1361,6 +1390,15 @@ class WP_Optimize {
 				'order' => 40,
 			),
 			array(
+				'page_title' => __('Minify', 'wp-optimize'),
+				'menu_title' => __('Minify', 'wp-optimize'),
+				'menu_slug' => 'wpo_minify',
+				'function' => array($this, 'display_admin'),
+				'icon' => 'dashboard',
+				'create_submenu' => true,
+				'order' => 50,
+			),
+			array(
 				'create_submenu' => false,
 				'order' => 55,
 				'icon' => 'separator',
@@ -1419,7 +1457,7 @@ class WP_Optimize {
 	}
 
 	public function get_templates_dir() {
-		return apply_filters('wp_optimize_templates_dir', $this->wp_normalize_path(WPO_PLUGIN_MAIN_PATH.'/templates'));
+		return apply_filters('wp_optimize_templates_dir', $this->wp_normalize_path(WPO_PLUGIN_MAIN_PATH.'templates'));
 	}
 
 	public function get_templates_url() {
@@ -1447,7 +1485,7 @@ class WP_Optimize {
 		}
 
 		if (!isset($template_file)) {
-			$template_file = WPO_PLUGIN_MAIN_PATH.'/templates/'.$path;
+			$template_file = WPO_PLUGIN_MAIN_PATH.'templates/'.$path;
 		}
 
 		$template_file = apply_filters('wp_optimize_template', $template_file, $path);
@@ -1579,11 +1617,11 @@ class WP_Optimize {
 	 * @return void
 	 */
 	public function schedule_plugin_cron_tasks() {
-		if (!wp_next_scheduled('wpo_plugin_cron_tasks')) {
-			wp_schedule_event(current_time("timestamp", 0), 'twicedaily', 'wpo_plugin_cron_tasks');
+		if (!wp_next_scheduled('wpo_weekly_cron_tasks')) {
+			wp_schedule_event(current_time("timestamp", 0), 'weekly', 'wpo_weekly_cron_tasks');
 		}
 
-		add_action('wpo_plugin_cron_tasks', array($this, 'do_plugin_cron_tasks'));
+		add_action('wpo_weekly_cron_tasks', array($this, 'do_weekly_cron_tasks'));
 	}
 
 	/**
@@ -1591,8 +1629,9 @@ class WP_Optimize {
 	 *
 	 * @return void
 	 */
-	public function do_plugin_cron_tasks() {
+	public function do_weekly_cron_tasks() {
 		// add tasks here.
+		$this->get_db_info()->update_plugin_json();
 	}
 
 	/**
@@ -2090,6 +2129,13 @@ class WP_Optimize {
 		 */
 		return apply_filters('wpo_template_should_include_data', $this->is_updraft_central_request());
 	}
+
+	/**
+	 * Load the templates for the modal window
+	 */
+	public function load_modal_template() {
+		$this->include_template('modal.php');
+	}
 }
 
 /**
@@ -2109,7 +2155,7 @@ function wpo_activation_actions() {
 	}
 
 	WP_Optimize()->get_options()->set_default_options();
-	// WP_Optimize()->get_minify()->plugin_activate();
+	WP_Optimize()->get_minify()->plugin_activate();
 }
 
 /**
@@ -2118,12 +2164,13 @@ function wpo_activation_actions() {
 function wpo_deactivation_actions() {
 	WP_Optimize()->wpo_cron_deactivate();
 	WP_Optimize()->get_page_cache()->disable();
-	// WP_Optimize()->get_minify()->plugin_deactivate();
+	WP_Optimize()->get_minify()->plugin_deactivate();
 }
 
 function wpo_cron_deactivate() {
 	WP_Optimize()->log('running wpo_cron_deactivate()');
 	wp_clear_scheduled_hook('wpo_cron_event2');
+	wp_clear_scheduled_hook('wpo_weekly_cron_tasks');
 }
 
 /**
@@ -2131,8 +2178,7 @@ function wpo_cron_deactivate() {
  */
 function wpo_uninstall_actions() {
 	WP_Optimize()->get_options()->delete_all_options();
-	wp_clear_scheduled_hook('wpo_cron_plugin');
-	// WP_Optimize()->get_minify()->plugin_uninstall();
+	WP_Optimize()->get_minify()->plugin_uninstall();
 }
 
 function WP_Optimize() {

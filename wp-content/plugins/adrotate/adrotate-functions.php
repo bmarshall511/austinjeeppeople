@@ -729,7 +729,7 @@ function adrotate_status($status, $args = null) {
 		break;
 
 		case '226' :
-			echo '<div id="message" class="updated"><p>'. __('Advert HTML generated and placed in the AdCode field. Configure your advert below.', 'adrotate') .'</div>';
+			echo '<div id="message" class="updated"><p>'. __('Advert HTML generated and placed in the AdCode field. Configure your advert below. Do not forget to check all settings and schedule it.', 'adrotate') .'</div>';
 		break;
 
 		// Settings
@@ -776,6 +776,14 @@ function adrotate_status($status, $args = null) {
 
 		case '509' :
 			echo '<div id="message" class="updated"><p>'. __('No ads found.', 'adrotate') .'</p></div>';
+		break;
+		
+		case '513' :
+			echo '<div id="message" class="error"><p>'. __('The advert hash is not usable or is missing required data. Please copy the hash correctly and try again.', 'adrotate') .'</p></div>';
+		break;
+		
+		case '514' :
+			echo '<div id="message" class="error"><p>'. __('The advert hash can not be used on the same site as it originated from or is not a valid hash for importing.', 'adrotate') .'</p></div>';
 		break;
 		
 		default :

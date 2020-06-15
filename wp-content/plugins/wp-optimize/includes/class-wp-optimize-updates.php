@@ -23,6 +23,7 @@ class WP_Optimize_Updates {
 	private static $updates = array(
 		'3.0.12' => array('delete_old_locks'),
 		'3.0.17' => array('disable_cache_directories_viewing'),
+		'3.1.0' => array('reset_wpo_plugin_cron_tasks_schedule'),
 	);
 
 	/**
@@ -72,6 +73,10 @@ class WP_Optimize_Updates {
 	 */
 	public static function disable_cache_directories_viewing() {
 		wpo_disable_cache_directories_viewing();
+	}
+
+	public static function reset_wpo_plugin_cron_tasks_schedule() {
+		wp_clear_scheduled_hook('wpo_plugin_cron_tasks');
 	}
 }
 

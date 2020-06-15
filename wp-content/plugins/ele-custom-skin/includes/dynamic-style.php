@@ -16,6 +16,14 @@ function ECS_parse_selector($selector,$wrapper,$value){
   $selector = str_replace(["{{VALUE}}","{{URL}}","{{UNIT}}"],$clean_value,$selector);
   return $selector;
 }
+function ECS_recursive_unset(&$array, $unwanted_key) {
+    unset($array[$unwanted_key]);
+    foreach ($array as &$value) {
+        if (is_array($value)) {
+            recursive_unset($value, $unwanted_key);
+        }
+    }
+}
 // dynamic style for elements
 function ECS_set_dynamic_style( \Elementor\Element_Base $element ) {
   global $ecs_render_loop;
@@ -28,8 +36,8 @@ function ECS_set_dynamic_style( \Elementor\Element_Base $element ) {
 
   $all_controls = isset($all_controls) ? $all_controls : []; $dynamic_settings = isset($dynamic_settings) ? $dynamic_settings : [];
   $controls = array_intersect_key( $all_controls, $dynamic_settings );
-
-  $settings = @$element->parse_dynamic_settings( $dynamic_settings, $controls); // @ <- dirty fix for that fugly controls-stack.php  Illegal string offset 'url' error
+  ECS_recursive_unset($dynamic_settings, 'link');//we don't need the link options
+  $settings = $element->parse_dynamic_settings( $dynamic_settings, $controls); // @ <- dirty fix for that fugly controls-stack.php  Illegal string offset 'url' error
 
   $ECS_css="";
   $element_wrapper="#post-{$PostID} .elementor-{$LoopID} .elementor-element.elementor-element-{$ElementID}";

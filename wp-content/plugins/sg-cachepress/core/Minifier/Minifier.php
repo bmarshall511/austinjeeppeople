@@ -70,6 +70,7 @@ class Minifier {
 		'tve',
 		'elementor-preview',
 		'preview',
+		'wc-api',
 	);
 
 	/**
