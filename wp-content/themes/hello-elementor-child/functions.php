@@ -54,3 +54,8 @@ require_once get_stylesheet_directory() . '/inc/login.php';
  * Include bbpress functionality.
  */
 require_once get_stylesheet_directory() . '/inc/bbpress.php';
+
+/**
+ * Include users functionality.
+ */
+require_once get_stylesheet_directory() . '/inc/users.php';

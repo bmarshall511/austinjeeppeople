@@ -9,12 +9,101 @@
 
 /* stylelint-disable selector-max-id */
 #bbpress-forums {
+  color: var(--medium-gray);
   font-size: var(--global-font-size);
   line-height: var(--global-lineheight);
   margin-bottom: 0;
 }
 
+#bbpress-forums ul.bbp-forums,
+#bbpress-forums ul.bbp-lead-topic,
+#bbpress-forums ul.bbp-replies,
+#bbpress-forums ul.bbp-search-results,
+#bbpress-forums ul.bbp-topics {
+  font-size: var(--global-font-size);
+}
+
+#bbpress-forums li.bbp-body ul.forum,
+#bbpress-forums li.bbp-body ul.topic {
+  border-top: 0;
+  padding: 2rem;
+}
+
+#bbpress-forums .bbp-forum-info .bbp-forum-content,
+#bbpress-forums p.bbp-topic-meta {
+  font-size: var(--global-font-size);
+  margin: 0;
+}
+
 #bbpress-forums li.bbp-header {
   background: var(--dark-gray);
 }
+
+#bbpress-forums li.bbp-footer,
+#bbpress-forums li.bbp-header {
+  border-top: 0;
+}
+
+#bbpress-forums ul.bbp-forums,
+#bbpress-forums ul.bbp-lead-topic,
+#bbpress-forums ul.bbp-replies,
+#bbpress-forums ul.bbp-search-results,
+#bbpress-forums ul.bbp-topics {
+  border: 0;
+}
+
+#bbpress-forums div.odd,
+#bbpress-forums ul.odd {
+
+}
+
+#bbpress-forums div.even,
+#bbpress-forums ul.even {
+
+}
+
+#bbpress-forums .bbp-forums-list {
+  border-left: 0;
+}
+
+#bbpress-forums .bbp-forums-list .bbp-forum {
+  font-size: var(--global-font-size);
+}
+
+#bbpress-forums .bbp-forums-list .bbp-forum.css-sep:not(:last-child)::after {
+  content: none;
+}
+
+#bbpress-forums .bbp-forums-list .bbp-forum {
+  display: flex;
+  width: 100%;
+}
+
+// Custom
+.hec-bbpress-forum-title {
+  font-size: 1.3rem;
+  margin-bottom: 0;
+}
+
+#bbpress-forums .bbp-forum-title {
+  color: var(--black);
+
+  &::after {
+    background-image: url('/wp-content/uploads/2020/05/chevron-right.svg');
+    content: '';
+    display: inline-block;
+    height: 15px;
+    margin-left: 0.5rem;
+    width: 15px;
+  }
+
+  &::before {
+    background-color: var(--black);
+    content: '';
+    display: block;
+    height: 3px;
+    width: 25px;
+  }
+}
+
 /* stylelint-enable selector-max-id */

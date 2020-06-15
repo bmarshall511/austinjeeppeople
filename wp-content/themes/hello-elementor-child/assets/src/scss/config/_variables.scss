@@ -12,6 +12,13 @@
 ///   font-weight: var(--global-weight-bold);
 $global-weight-bold: 700;
 
+/// Color used for medium gray UI items.
+/// @type color
+/// @example scss
+///   color: $medium-gray;
+///   color: var(--medium-gray);
+$medium-gray: #303030;
+
 /// Color used for dark gray UI items.
 /// @type color
 /// @example scss
