@@ -55,7 +55,7 @@
                         "id": ""
                     },
                     "display_format": "F j, Y",
-                    "return_format": "F j, Y",
+                    "return_format": "m\/d\/Y",
                     "first_day": 1
                 }
             ]
@@ -314,5 +314,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1589899298
+    "modified": 1592231580
 }
