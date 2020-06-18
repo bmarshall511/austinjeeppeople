@@ -25,6 +25,11 @@
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 /**
- * Post types & taxonomies
+ * Post types
  */
 require plugin_dir_path( __FILE__ ) . '/inc/post-types.php';
+
+/**
+ * Taxonomies
+ */
+require plugin_dir_path( __FILE__ ) . '/inc/taxonomies.php';

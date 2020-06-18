@@ -1,6 +1,6 @@
 <?php
 /**
- * Defines the vehicle post type and related taxonomies.
+ * Defines the vehicle post type.
  *
  * @package WordPress
  * @subpackage AJPGarage
@@ -55,7 +55,7 @@ if ( ! function_exists('ajpgarage_post_types') ) {
       'labels'                => $labels,
       'show_in_rest'          => true,
       'supports'              => array( 'title', 'editor', 'thumbnail', 'revisions', 'excerpt', 'comments' ),
-      'taxonomies'            => array( 'category', 'post_tag' ),
+      'taxonomies'            => [],
       'hierarchical'          => false,
       'public'                => true,
       'show_ui'               => true,

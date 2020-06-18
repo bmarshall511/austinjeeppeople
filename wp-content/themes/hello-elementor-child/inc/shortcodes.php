@@ -13,6 +13,14 @@ function hello_elementor_child_shortcode_the_content( $atts ) {
 }
 add_shortcode( 'the_content', 'hello_elementor_child_shortcode_the_content' );
 
+// [num_members]
+function hello_elementor_child_shortcode_num_members( $atts ) {
+  $number = count_users();
+
+  return number_format( $number['total_users'], 0 );
+}
+add_shortcode( 'num_members', 'hello_elementor_child_shortcode_num_members' );
+
 // [complete_address]
 function hello_elementor_child_shortcode_complete_address() {
   $address = get_field( 'ajp_address' );
